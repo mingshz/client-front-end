@@ -21,9 +21,7 @@ const MyForm = props => {
             [styles.error]: errors.mobile && touched.mobile
           })}
         />
-        <button type="button" className={styles.sendMsgBtn}>
-          发送
-        </button>
+        <button type="button" className={styles.sendMsgBtn}>发送</button>
         {errors.mobile && touched.mobile && <span className={styles.inputError}>{errors.mobile}</span>}
       </div>
       <div className={styles.formItem}>
