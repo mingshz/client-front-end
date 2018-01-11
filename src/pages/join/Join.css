@@ -1,0 +1,47 @@
+:local .main {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(38, 38, 40, 0.9);
+  background-image: url('./join-bg.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+:local .header {
+  width: 100%;
+  height: 1.973333rem;
+}
+:local .block {
+  width: 1.973333rem;
+  height: 1.973333rem;
+  background-image: linear-gradient(-180deg, #deb96b 0%, #a07f52 100%);
+  float: left;
+}
+:local .title {
+  padding-left: 2.88rem;
+  line-height: 1.973333rem;
+  color: #fff;
+}
+:local .title h4 {
+  font-size: 20px;
+}
+:local .body {
+  font-size: 20px;
+}
+@svg 1px-border {
+  height: 2px;
+  @rect {
+    fill: var(--color, black);
+    width: 100%;
+    height: 50%;
+  }
+}
+:local .body form {
+  padding: 0.666667rem 1.6rem;
+  border: 1px solid transparent;
+  border-image: svg(1px-border param(--color #00b1ff)) 2 2 stretch;
+}
+:local .body form > label {
+  display: block;
+  font-size: 11px;
+  color: #8a8a8a;
+}
