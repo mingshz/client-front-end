@@ -21,6 +21,9 @@ const MyForm = props => {
             [styles.error]: errors.mobile && touched.mobile
           })}
         />
+        <button type="button" className={styles.sendMsgBtn}>
+          发送
+        </button>
         {errors.mobile && touched.mobile && <span className={styles.inputError}>{errors.mobile}</span>}
       </div>
       <div className={styles.formItem}>
@@ -55,32 +58,56 @@ const MyForm = props => {
       </div>
       <div className={styles.formItem}>
         <label htmlFor="gender">称谓</label>
-        <input
+        <select
           id="gender"
           placeholder="请输入您的姓氏"
           type="text"
           value={values.gender}
           onChange={handleChange}
           onBlur={handleBlur}
+        >
+          <option value="male">先生</option>
+          <option value="female">女士</option>
+        </select>
+      </div>
+      <div className={styles.extraTitle}>
+        <h4>已收到会员卡的新VIP</h4>
+      </div>
+      <div className={styles.formItem}>
+        <label htmlFor="cdKey">卡密</label>
+        <input
+          id="cdKey"
+          placeholder="请输入卡背部的卡密"
+          type="text"
+          value={values.cdKey}
+          onChange={handleChange}
+          onBlur={handleBlur}
           className={classNames({
-            [styles.error]: errors.gender && touched.gender
+            [styles.error]: errors.cdKey && touched.cdKey
           })}
         />
-        {errors.gender && touched.gender && <span className={styles.inputError}>{errors.gender}</span>}
+        {errors.cdKey && touched.cdKey && <span className={styles.inputError}>{errors.cdKey}</span>}
       </div>
-      <button type="submit" disabled={isSubmitting}>
-        Submit
-      </button>
+      <div className={styles.submitButton}>
+        <button type="submit" disabled={isSubmitting}>
+          开启锋尚来美
+        </button>
+      </div>
     </form>
   )
 }
 
 const JoinForm = withFormik({
-  mapPropsToValues: () => ({ mobile: '' }),
+  mapPropsToValues: () => ({ mobile: '', authCode: '', surname: '', gender: 'male' }),
   validationSchema: Yup.object().shape({
     mobile: Yup.string()
       .matches(/^(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/, '请输入正确的手机号')
-      .required('请输入手机号')
+      .required('请输入手机号'),
+    authCode: Yup.string().required('请输入验证码'),
+    surname: Yup.string()
+      .max(5, '请输入最多5位中文')
+      .matches(/^[\u4e00-\u9fa5]{0,}$/, '请输入中文姓氏')
+      .required('请输入姓氏')
   }),
   handleSubmit: (values, { setSubmitting }) => {
     setTimeout(() => {
