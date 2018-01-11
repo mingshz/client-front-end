@@ -37,11 +37,38 @@
 }
 :local .body form {
   padding: 0.666667rem 1.6rem;
-  border: 1px solid transparent;
-  border-image: svg(1px-border param(--color #00b1ff)) 2 2 stretch;
 }
-:local .body form > label {
+:local .formItem {
+  position: relative;
+  margin-bottom: 0.586667rem;
+}
+:local .formItem > label {
   display: block;
   font-size: 11px;
   color: #8a8a8a;
+}
+:local .formItem > input {
+  padding: 0.213333rem 0;
+  display: block;
+  width: 100%;
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  border-image: svg(1px-border param(--color #8a8a8a)) 2 2 stretch;
+}
+:local .formItem > input.error {
+  border-image: svg(1px-border param(--color #f50)) 2 2 stretch;
+}
+:local .formItem > input::-webkit-input-placeholder {
+  color: #8a8a8a !important;
+}
+
+:local .inputError {
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  color: #f50;
+  font-size: 12px;
 }

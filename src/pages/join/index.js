@@ -5,24 +5,69 @@ import classNames from 'classnames'
 import styles from './Join.css'
 
 const MyForm = props => {
-  const { values, touched, errors, dirty, isSubmitting, handleChange, handleBlur, handleSubmit, handleReset } = props
+  const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        placeholder="Enter your email"
-        type="text"
-        value={values.email}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        className={errors.email && touched.email ? 'text-input error' : 'text-input'}
-      />
-      {errors.email && touched.email && <div className="input-feedback">{errors.email}</div>}
-
-      <button type="button" className="outline" onClick={handleReset} disabled={!dirty || isSubmitting}>
-        Reset
-      </button>
+    <form onSubmit={handleSubmit} autoComplete="off">
+      <div className={styles.formItem}>
+        <label htmlFor="mobile">会员手机</label>
+        <input
+          id="mobile"
+          placeholder="请输入您的手机号"
+          type="text"
+          value={values.mobile}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={classNames({
+            [styles.error]: errors.mobile && touched.mobile
+          })}
+        />
+        {errors.mobile && touched.mobile && <span className={styles.inputError}>{errors.mobile}</span>}
+      </div>
+      <div className={styles.formItem}>
+        <label htmlFor="authCode">验证码</label>
+        <input
+          id="authCode"
+          placeholder="请输入收到的验证码"
+          type="text"
+          value={values.authCode}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={classNames({
+            [styles.error]: errors.authCode && touched.authCode
+          })}
+        />
+        {errors.authCode && touched.authCode && <span className={styles.inputError}>{errors.authCode}</span>}
+      </div>
+      <div className={styles.formItem}>
+        <label htmlFor="surname">姓氏</label>
+        <input
+          id="surname"
+          placeholder="请输入您的姓氏"
+          type="text"
+          value={values.surname}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={classNames({
+            [styles.error]: errors.surname && touched.surname
+          })}
+        />
+        {errors.surname && touched.surname && <span className={styles.inputError}>{errors.surname}</span>}
+      </div>
+      <div className={styles.formItem}>
+        <label htmlFor="gender">称谓</label>
+        <input
+          id="gender"
+          placeholder="请输入您的姓氏"
+          type="text"
+          value={values.gender}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={classNames({
+            [styles.error]: errors.gender && touched.gender
+          })}
+        />
+        {errors.gender && touched.gender && <span className={styles.inputError}>{errors.gender}</span>}
+      </div>
       <button type="submit" disabled={isSubmitting}>
         Submit
       </button>
@@ -31,11 +76,11 @@ const MyForm = props => {
 }
 
 const JoinForm = withFormik({
-  mapPropsToValues: () => ({ email: '' }),
+  mapPropsToValues: () => ({ mobile: '' }),
   validationSchema: Yup.object().shape({
-    email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is required!')
+    mobile: Yup.string()
+      .matches(/^(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/, '请输入正确的手机号')
+      .required('请输入手机号')
   }),
   handleSubmit: (values, { setSubmitting }) => {
     setTimeout(() => {
