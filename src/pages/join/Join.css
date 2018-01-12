@@ -1,8 +1,6 @@
 :local .main {
-  width: 100%;
-  height: 100%;
   background-color: rgba(38, 38, 40, 0.9);
-  background-image: url('./join-bg.png');
+  /* background-image: url('./join-bg.png'); */
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
@@ -41,6 +39,12 @@
 :local .formItem {
   position: relative;
   margin-bottom: 0.586667rem;
+  background-image: svg(1px-border param(--color #8a8a8a));
+  background-repeat: no-repeat;
+  background-position: bottom left;
+}
+:local .error {
+  background-image: svg(1px-border param(--color #f50));
 }
 :local .formItem > label {
   display: block;
@@ -55,8 +59,6 @@
   border: none;
   font-size: 15px;
   background: transparent;
-  border-bottom: 1px solid transparent;
-  border-image: svg(1px-border param(--color #8a8a8a)) 2 2 stretch;
 }
 :local .sendMsgBtn {
   position: absolute;
@@ -77,9 +79,6 @@
   cursor: not-allowed;
   border-color: #8a8a8a;
 }
-:local .formItem > input.error {
-  border-image: svg(1px-border param(--color #f50)) 2 2 stretch;
-}
 :local .formItem > input::-webkit-input-placeholder {
   color: #8a8a8a !important;
 }
@@ -90,9 +89,6 @@
   color: #fff;
   border: none;
   font-size: 15px;
-  background: transparent;
-  border-bottom: 1px solid transparent;
-  border-image: svg(1px-border param(--color #8a8a8a)) 2 2 stretch;
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -132,4 +128,12 @@
   color: #8a8a8a;
   cursor: not-allowed;
   border-color: #8a8a8a;
+}
+@media only screen and (min-width: 320px) and (max-width: 568px) {
+  :local .inputError {
+    bottom: -16px;
+  }
+  :local .sendMsgBtn {
+    font-size: 10px;
+  }
 }

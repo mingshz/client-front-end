@@ -8,7 +8,11 @@ const MyForm = props => {
   const { values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit } = props
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
-      <div className={styles.formItem}>
+      <div
+        className={classNames(styles.formItem, {
+          [styles.error]: errors.mobile && touched.mobile
+        })}
+      >
         <label htmlFor="mobile">会员手机</label>
         <input
           id="mobile"
@@ -17,14 +21,17 @@ const MyForm = props => {
           value={values.mobile}
           onChange={handleChange}
           onBlur={handleBlur}
-          className={classNames({
-            [styles.error]: errors.mobile && touched.mobile
-          })}
         />
-        <button type="button" className={styles.sendMsgBtn}>发送</button>
+        <button type="button" className={styles.sendMsgBtn}>
+          发送
+        </button>
         {errors.mobile && touched.mobile && <span className={styles.inputError}>{errors.mobile}</span>}
       </div>
-      <div className={styles.formItem}>
+      <div
+        className={classNames(styles.formItem, {
+          [styles.error]: errors.authCode && touched.authCode
+        })}
+      >
         <label htmlFor="authCode">验证码</label>
         <input
           id="authCode"
@@ -39,7 +46,11 @@ const MyForm = props => {
         />
         {errors.authCode && touched.authCode && <span className={styles.inputError}>{errors.authCode}</span>}
       </div>
-      <div className={styles.formItem}>
+      <div
+        className={classNames(styles.formItem, {
+          [styles.error]: errors.surname && touched.surname
+        })}
+      >
         <label htmlFor="surname">姓氏</label>
         <input
           id="surname"
@@ -80,11 +91,7 @@ const MyForm = props => {
           value={values.cdKey}
           onChange={handleChange}
           onBlur={handleBlur}
-          className={classNames({
-            [styles.error]: errors.cdKey && touched.cdKey
-          })}
         />
-        {errors.cdKey && touched.cdKey && <span className={styles.inputError}>{errors.cdKey}</span>}
       </div>
       <div className={styles.submitButton}>
         <button type="submit" disabled={isSubmitting}>
@@ -118,7 +125,7 @@ const JoinForm = withFormik({
 
 const JoinContent = props => {
   return (
-    <div className={styles.main}>
+    <div className={classNames(styles.main, 'main')}>
       <div
         className={classNames(styles.header, {
           clearfix: true
