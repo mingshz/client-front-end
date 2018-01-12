@@ -1,22 +1,22 @@
 :local .main {
   background-color: rgba(38, 38, 40, 0.9);
-  /* background-image: url('./join-bg.png'); */
+  background-image: url('./join-bg.png');
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 :local .header {
   width: 100%;
-  height: 1.973333rem;
+  height: 1.97rem;
 }
 :local .block {
-  width: 1.973333rem;
-  height: 1.973333rem;
+  width: 1.97rem;
+  height: 1.97rem;
   background-image: linear-gradient(-180deg, #deb96b 0%, #a07f52 100%);
   float: left;
 }
 :local .title {
   padding-left: 2.88rem;
-  line-height: 1.973333rem;
+  line-height: 1.97rem;
   color: #fff;
 }
 :local .title h4 {
@@ -34,11 +34,11 @@
   }
 }
 :local .body form {
-  padding: 0.666667rem 1.6rem;
+  padding: 0.64rem 1.6rem;
 }
 :local .formItem {
   position: relative;
-  margin-bottom: 0.586667rem;
+  margin-bottom: 0.59rem;
   background-image: svg(1px-border param(--color #8a8a8a));
   background-repeat: no-repeat;
   background-position: bottom left;
@@ -52,7 +52,7 @@
   color: #8a8a8a;
 }
 :local .formItem > input {
-  padding: 0.213333rem 0;
+  padding: 0.21rem 0;
   display: block;
   width: 100%;
   color: #fff;
@@ -64,8 +64,8 @@
   position: absolute;
   right: 0;
   top: 9px;
-  width: 1.386667rem;
-  height: 0.746667rem;
+  width: 1.39rem;
+  height: 0.75rem;
   background: transparent;
   border: 1px solid #8a8a8a;
   border-radius: 2px;
@@ -83,7 +83,7 @@
   color: #8a8a8a !important;
 }
 :local .formItem > select {
-  padding: 0.213333rem 0;
+  padding: 0.21rem 0;
   display: block;
   width: 100%;
   color: #fff;
@@ -104,19 +104,19 @@
 }
 :local .extraTitle {
   padding-top: 0.32rem;
-  margin-bottom: 0.533333rem;
+  margin-bottom: 0.53rem;
   color: #fff;
   font-size: 20px;
   text-align: center;
 }
 :local .submitButton {
-  padding-top: 0.266667rem;
+  padding-top: 0.27rem;
   text-align: center;
 }
 :local .submitButton button {
   display: inline-block;
   width: 3.2rem;
-  height: 1.173333rem;
+  height: 1.17rem;
   border: 2px solid #ffffff;
   border-radius: 100px;
   font-size: 12px;
