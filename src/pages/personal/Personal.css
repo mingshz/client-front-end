@@ -1,0 +1,107 @@
+:local .header {
+  display: flex;
+  padding: 0.53rem 0.69rem;
+  height: 2.72rem;
+  background: #f0f0f0;
+  align-items: center;
+}
+:local .hd {
+  margin-right: 0.48rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  font-size: 12px;
+  border: 2px solid #262628;
+  border-radius: 100%;
+  overflow: hidden;
+}
+:local .avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+:local .bd {
+  flex: 1;
+  min-width: 0;
+}
+:local .bd h4 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #262628;
+  line-height: 1.5;
+}
+:local .bd p {
+  font-size: 12px;
+  color: rgba(38, 38, 40, 0.5);
+  line-height: 1.5;
+}
+:local .capital {
+  padding: 0.43rem 0.96rem 0;
+  height: 2.72rem;
+  background: #f0f0f0;
+}
+:local .capital span {
+  font-size: 14px;
+  color: rgba(38, 38, 40, 0.5);
+}
+:local .capital p {
+  font-size: 36px;
+  color: #262628;
+}
+:local .capital p::before {
+  content: '￥';
+  display: inline-block;
+  font-size: 24px;
+  text-indent: -0.12rem;
+}
+:local .list {
+  padding: 2.4rem 0.91rem 0;
+}
+:local .list li {
+  display: flex;
+  margin-bottom: 0.59rem;
+  align-items: center;
+}
+:local .list i {
+  margin-right: 0.53rem;
+  width: 0.61rem;
+  height: 0.61rem;
+  font-size: 20px;
+  color: #333;
+}
+@svg 1px-border {
+  height: 2px;
+  @rect {
+    fill: var(--color, black);
+    width: 100%;
+    height: 50%;
+    opacity: 0.1;
+  }
+}
+:local .list p {
+  position: relative;
+  flex: 1;
+  height: 1.01rem;
+  line-height: 1.01rem;
+  color: #262628;
+  font-size: 16px;
+  font-weight: bold;
+  background-image: svg(1px-border param(--color #262628));
+  background-repeat: no-repeat;
+  background-position: bottom left;
+}
+:local .list p::after {
+  content: ' ';
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  border-width: 2px 2px 0 0;
+  border-color: #c8c8cd;
+  border-style: solid;
+  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position: absolute;
+  top: 50%;
+  margin-top: -4px;
+  right: 6px;
+}

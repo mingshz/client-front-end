@@ -120,7 +120,7 @@ const JoinForm = withFormik({
       setSubmitting(false)
     }, 1000)
   },
-  displayName: 'JoinForm' // helps with React DevTools
+  displayName: 'JoinForm'
 })(MyForm)
 
 const JoinContent = props => {
