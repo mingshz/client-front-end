@@ -1,0 +1,85 @@
+:local .qrCode {
+  display: flex;
+  padding: 0.53rem 1.2rem;
+  height: 4.37rem;
+  background: #d8d8d8;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+}
+:local .hd {
+  margin-right: 0.53rem;
+  width: 3.2rem;
+  height: 3.2rem;
+}
+:local .bd {
+  flex: 1;
+}
+:local .bd h4 {
+  margin-top: 0.43rem;
+  font-size: 18px;
+  color: #484848;
+  line-height: 2;
+}
+:local .bd p {
+  font-weight: bold;
+  font-size: 14px;
+  color: #070707;
+}
+:local .vipCard {
+  padding: 0.61rem 0.53rem;
+}
+:local .card {
+  position: relative;
+  height: 4.64rem;
+  background-image: radial-gradient(circle at top, #727272 0%, #000000 100%);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0.4rem 0.8rem 0.13rem rgba(0, 0, 0, 0.6);
+}
+:local .vip {
+  position: absolute;
+  top: 0;
+  font-size: 2.35rem;
+  color: rgba(255, 255, 255, 0.16);
+  line-height: 1.5;
+}
+:local .logo {
+  position: absolute;
+  top: 0.77rem;
+  right: 0.51rem;
+  display: block;
+  width: 1.47rem;
+  height: 1.47rem;
+}
+:local .name {
+  position: absolute;
+  top: 1.07rem;
+  left: 0.51rem;
+  background: #424242;
+  width: 4.27rem;
+  height: 0.67rem;
+  line-height: 0.67rem;
+  color: #fff;
+  font-size: 0.53rem;
+  text-align: center;
+}
+:local .bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding-top: 0.27rem;
+  padding-left: 0.53rem;
+  width: 7.47rem;
+  height: 1.84rem;
+  font-size: 0.32rem;
+  background: rgba(75, 75, 75, 0.34);
+  border-top-right-radius: 1.84rem;
+  border-bottom-right-radius: 1.84rem;
+}
+:local .number {
+  font-size: 0.48rem;
+  color: #fce76c;
+  line-height: 1.5;
+}
+:local .bottom span {
+  color: #fff;
+}

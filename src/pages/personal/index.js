@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Personal.css'
 
-const PersonalContent = props => {
+const Personal = props => {
   return (
     <div className="main">
       <div className={styles.header}>
@@ -40,4 +40,4 @@ const PersonalContent = props => {
     </div>
   )
 }
-export default PersonalContent
+export default Personal

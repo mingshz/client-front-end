@@ -36,7 +36,7 @@
   line-height: 1.5;
 }
 :local .capital {
-  padding: 0.43rem 0.96rem 0;
+  padding: 0.27rem 0.96rem 0;
   height: 2.72rem;
   background: #f0f0f0;
 }
@@ -96,9 +96,8 @@
   height: 8px;
   width: 8px;
   border-width: 2px 2px 0 0;
-  border-color: #c8c8cd;
+  border-color: #c9c9c9;
   border-style: solid;
-  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
   transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
   position: absolute;
   top: 50%;
