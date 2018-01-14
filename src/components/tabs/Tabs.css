@@ -1,0 +1,49 @@
+:local .tabs {
+  display: flex;
+  background-image: linear-gradient(-180deg, #363a43 0%, #27272f 100%);
+  box-shadow: 0 -10px 40px 0 rgba(0, 0, 0, 0.3);
+}
+:local .tabItem {
+  position: relative;
+  padding: 0.13rem 0.19rem 0;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 12px;
+  text-align: center;
+}
+:local .tabItem + .tabItem::before {
+  content: ' ';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  bottom: 0;
+  border-left: 1px solid #383838;
+  color: #383838;
+  transform-origin: 0 0;
+  transform: scaleX(0.5);
+}
+:local .tabWrap {
+  padding-bottom: 0.13rem;
+  background-image: linear-gradient(-180deg, #efdc84 0%, #806432 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+:local .active {
+  padding-bottom: 0.13rem;
+  color: #fffad4;
+  background-image: linear-gradient(-180deg, #deb86b 0%, #98702e 82%);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+:local .tabWrap i,
+:local .active i {
+  font-size: 17px;
+  line-height: 1.5;
+}
+:local .tabWrap p,
+:local .active p {
+  line-height: 1.2;
+}

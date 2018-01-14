@@ -1,0 +1,5 @@
+:local .list {
+  padding: 0.32rem;
+  background: #f1f1f1;
+  min-height: calc(100% - 1.33rem);
+}

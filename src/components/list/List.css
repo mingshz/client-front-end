@@ -1,0 +1,94 @@
+:local .list {
+  padding: 0.32rem;
+  margin-bottom: 0.32rem;
+  display: flex;
+  background: #fff;
+}
+:local .list:last-child {
+  margin-bottom: 0;
+}
+:local .hd {
+  margin-right: 0.27rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  overflow: hidden;
+}
+:local .bd {
+  flex: 1;
+}
+:local .title {
+  margin-bottom: 0.16rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 1.5;
+  font-size: 16px;
+  font-weight: bold;
+  color: #17171a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+:local .info {
+  margin-bottom: 0.4rem;
+  font-size: 14px;
+  color: #6c6c6c;
+  line-height: 1.2;
+}
+:local .info span {
+  padding-right: 0.16rem;
+}
+:local .info span + span {
+  padding-left: 0.16rem;
+}
+@svg 1px-border {
+  width: 2px;
+  @rect {
+    fill: var(--color, black);
+    width: 50%;
+    height: 100%;
+  }
+}
+:local .left {
+  background-image: svg(1px-border param(--color #979797));
+  background-repeat: no-repeat;
+  background-position: top left;
+}
+:local .distance {
+  float: right;
+  color: #d9ba04;
+}
+:local .price > div {
+  float: left;
+  height: 0.85rem;
+  line-height: 0.91rem;
+  font-family: Arial, sans-serif;
+}
+:local .new {
+  margin-right: 0.43rem;
+  width: 2.4rem;
+  font-size: 20px;
+  color: #fffad4;
+  text-align: center;
+  background-image: linear-gradient(-180deg, #e0bc2d 0%, #cc9331 80%);
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+}
+:local .old {
+  font-size: 18px;
+  color: #a5a5a5;
+  text-decoration: line-through;
+}
+@media only screen and (min-width: 320px) and (max-width: 568px) {
+  :local .info {
+    margin-bottom: 0.21rem;
+    font-size: 14px;
+    color: #6c6c6c;
+    line-height: 1.2;
+  }
+  :local .new {
+    font-size: 18px;
+  }
+  :local .old {
+    font-size: 14px;
+  }
+}
