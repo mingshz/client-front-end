@@ -1,0 +1,42 @@
+:local .hd {
+  width: 100%;
+  height: 5.81rem;
+  background: #e2e6ea;
+}
+:local .hd img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+:local .info {
+  padding: 0.27rem;
+  line-height: 1.5;
+}
+:local .info h4 {
+  font-size: 18px;
+  color: #17171a;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+:local .info p {
+  font-size: 14px;
+  color: #6c6c6c;
+}
+:local .info i {
+  color: #f5a623;
+  font-size: 12px;
+}
+:local .bd {
+  padding: 0.27rem;
+}
+:local .bd p {
+  font-size: 16px;
+}
+:local .bd img {
+  display: block;
+  width: 100%;
+}

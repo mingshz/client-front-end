@@ -126,11 +126,7 @@ const JoinForm = withFormik({
 const JoinContent = props => {
   return (
     <div className={classNames(styles.main, 'main')}>
-      <div
-        className={classNames(styles.header, {
-          clearfix: true
-        })}
-      >
+      <div className={classNames(styles.header, 'clearfix')}>
         <div className={styles.block} />
         <div className={styles.title}>
           <h4>加入锋尚来美VIP</h4>
