@@ -1,4 +1,8 @@
 :local .tabs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   background-image: linear-gradient(-180deg, #363a43 0%, #27272f 100%);
   box-shadow: 0 -10px 40px 0 rgba(0, 0, 0, 0.3);
