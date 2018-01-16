@@ -95,7 +95,7 @@ class OrderListPage extends Component {
         ref={el => (this.lv = el)}
         dataSource={this.state.dataSource}
         renderFooter={() => (
-          <div style={{ padding: 30, textAlign: 'center' }}>{this.state.isLoading ? '加载中...' : '加载更多'}</div>
+          <div style={{ padding: 10, textAlign: 'center', fontSize: '14px'}}>{this.state.isLoading ? '加载中...' : '加载更多'}</div>
         )}
         renderRow={row}
         renderSeparator={separator}
