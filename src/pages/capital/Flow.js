@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Flow.css'
 import List from '../../components/capital/FlowList'
 
-const Flow = prop => {
+const Flow = props => {
   return (
     <div className={styles.flow}>
       <div className={styles.hd}>

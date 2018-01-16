@@ -3,7 +3,7 @@ import styles from './Item.css'
 import Tabs from '../../components/tabs'
 import List from '../../components/list'
 
-const Items = prop => {
+const Items = props => {
   return (
     <div className="main">
       <Tabs />

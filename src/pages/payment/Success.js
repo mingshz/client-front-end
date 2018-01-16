@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Payment.css'
 
-const Success = prop => {
+const Success = props => {
   return (
     <div className={styles.wrap}>
       <div className={styles.resultIcon}>

@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Detail.css'
 
-const Detail = prop => {
+const Detail = props => {
   return (
     <div>
       <div className={styles.hd}>

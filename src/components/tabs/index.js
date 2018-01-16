@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import styles from './Tabs.css'
 
-const Tabs = prop => {
+const Tabs = props => {
   return (
     <div className={styles.tabs}>
       <div className={styles.tabItem}>

@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import styles from './FLowList.css'
 
-const List = prop => {
+const List = props => {
   return (
     <div className={styles.list}>
       <p className={styles.time}>2017-12-30 19:00</p>

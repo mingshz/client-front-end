@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Payment.css'
 import List from '../../components/paymentList'
 
-const Payment = prop => {
+const Payment = props => {
   return (
     <div className={styles.wrap}>
       <div className={styles.header}>即将支付以下订单：</div>

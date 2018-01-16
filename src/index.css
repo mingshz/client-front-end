@@ -213,3 +213,6 @@ button {
 .hidden {
   display: none !important;
 }
+.am-pull-to-refresh-indicator {
+  font-size: 14px;
+}

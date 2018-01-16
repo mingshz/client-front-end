@@ -10,11 +10,12 @@ import './index.css'
 // import Payment from './pages/payment'
 // import Detail from './pages/items/Detail'
 // import Flow from './pages/capital/Flow'
-import Deposit from './pages/capital/Deposit'
+// import Deposit from './pages/capital/Deposit'
+import OrderList from './pages/order/OrderList'
 import registerServiceWorker from './registerServiceWorker'
 import '../node_modules/normalize.css/normalize.css'
 import './assets/font/iconfont.css'
 import 'amfe-flexible'
 
-ReactDOM.render(<Deposit />, document.getElementById('root'))
+ReactDOM.render(<OrderList />, document.getElementById('root'))
 registerServiceWorker()

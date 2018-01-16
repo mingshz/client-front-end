@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import styles from './List.css'
 
-const List = prop => {
+const List = props => {
   return (
     <div className={styles.list}>
       <div className={styles.hd}>

@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Vip.css'
 
-const Vip = prop => {
+const Vip = props => {
   return (
     <div className="main">
       <div className={styles.qrCode}>
