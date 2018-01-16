@@ -197,7 +197,19 @@ button {
   transform-origin: left top;
   transform: scale(0.5);
 }
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
 .main {
   width: 100%;
   min-height: 100%;
+}
+.show {
+  display: block !important;
+}
+.hidden {
+  display: none !important;
 }

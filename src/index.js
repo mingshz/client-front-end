@@ -8,11 +8,13 @@ import './index.css'
 // import Items from './pages/items'
 // import Success from './pages/payment/Success'
 // import Payment from './pages/payment'
-import Detail from './pages/items/Detail'
+// import Detail from './pages/items/Detail'
+// import Flow from './pages/capital/Flow'
+import Deposit from './pages/capital/Deposit'
 import registerServiceWorker from './registerServiceWorker'
 import '../node_modules/normalize.css/normalize.css'
 import './assets/font/iconfont.css'
 import 'amfe-flexible'
 
-ReactDOM.render(<Detail />, document.getElementById('root'))
+ReactDOM.render(<Deposit />, document.getElementById('root'))
 registerServiceWorker()

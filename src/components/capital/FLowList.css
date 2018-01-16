@@ -1,0 +1,33 @@
+:local .list {
+  padding: 0.27rem;
+  margin-top: 0.32rem;
+  background: #fff;
+}
+:local .time {
+  margin-bottom: 0.32rem;
+  font-size: 11px;
+  color: rgba(38, 38, 40, 0.4);
+}
+:local .info {
+  display: flex;
+  align-items: center;
+}
+:local .name {
+  flex: 1;
+  padding-left: 0.13rem;
+  font-size: 16px;
+  font-weight: bold;
+  color: #262628;
+  line-height: 1.5;
+}
+:local .number {
+  flex: 1;
+  padding-right: 0.4rem;
+  font-size: 24px;
+  color: #d9ba04;
+  line-height: 1.5;
+  text-align: right;
+}
+:local .in .number {
+  color: #43bd19;
+}
