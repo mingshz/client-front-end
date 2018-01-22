@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Async from 'react-code-splitting'
 import { useStrict } from 'mobx'
 import { Provider } from 'mobx-react'
@@ -15,7 +15,7 @@ class App extends Component {
             <Route path="/join" exact component={() => <Async load={import('./pages/join')} />} />
             {/* 个人中心 */}
             <Route path="/personal" exact component={() => <Async load={import('./pages/personal')} />} />
-            <Redirect from='/' exact to='/personal' />
+            <Redirect from="/" exact to="/personal" />
             {/* 会员卡 */}
             <Route path="/vip" exact component={() => <Async load={import('./pages/vip')} />} />
             {/* 项目列表 */}
@@ -32,6 +32,8 @@ class App extends Component {
             <Route path="/deposit" exact component={() => <Async load={import('./pages/capital/Deposit')} />} />
             {/* 订单列表 */}
             <Route path="/orders" exact component={() => <Async load={import('./pages/order/OrderList')} />} />
+            {/* 测试 */}
+            <Route path="/test" exact component={() => <Async load={import('./pages/join/indexV2')} />} />
           </Switch>
         </BrowserRouter>
       </Provider>

@@ -155,7 +155,7 @@ class JoinContent extends Component {
   }
 
   render() {
-    const { mobile, } = this.props
+    const { mobile } = this.props
     return (
       <div className={classNames(styles.main, 'main')}>
         <div className={classNames(styles.header, 'clearfix')}>

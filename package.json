@@ -45,6 +45,7 @@
     "postcss-write-svg": "jonathantneal/postcss-write-svg",
     "promise": "8.0.1",
     "raf": "3.4.0",
+    "rc-form": "^2.1.7",
     "react": "^16.2.0",
     "react-code-splitting": "^1.2.1",
     "react-dev-utils": "^4.2.1",
