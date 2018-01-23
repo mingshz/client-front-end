@@ -125,7 +125,7 @@ class JoinContent extends Component {
               })}
             >
               <label>会员手机</label>
-              <input {...mobileProps} placeholder="请输入您的手机号" type="text" />
+              <input {...mobileProps} placeholder="请输入您的手机号" type="tel" />
               <button type="button" className={styles.sendMsgBtn} disabled={isDisabled} onClick={this.sendAuthMsg}>
                 {buttonText}
               </button>
@@ -137,7 +137,7 @@ class JoinContent extends Component {
               })}
             >
               <label>验证码</label>
-              <input {...authCodeProps} placeholder="请输入收到的验证码" type="text" />
+              <input {...authCodeProps} placeholder="请输入收到的验证码" type="tel" />
               {getFieldError('authCode') ? (
                 <span className={styles.inputError}>{getFieldError('authCode')}</span>
               ) : null}
@@ -203,7 +203,7 @@ class JoinContent extends Component {
             ) : null}
             <div className={styles.submitButton}>
               <button type="button" onClick={this.submit} disabled={loading}>
-                {loading ? <Icon type="loading" size="xs" /> : null}
+                {!loading ? <Icon type="loading" size="xs" /> : null}
                 <span>开启锋尚来美</span>
               </button>
             </div>
