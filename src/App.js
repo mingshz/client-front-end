@@ -32,8 +32,6 @@ class App extends Component {
             <Route path="/deposit" exact component={() => <Async load={import('./pages/capital/Deposit')} />} />
             {/* 订单列表 */}
             <Route path="/orders" exact component={() => <Async load={import('./pages/order/OrderList')} />} />
-            {/* 测试 */}
-            <Route path="/test" exact component={() => <Async load={import('./pages/join/indexV2')} />} />
           </Switch>
         </BrowserRouter>
       </Provider>

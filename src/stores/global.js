@@ -5,13 +5,9 @@ import { Toast } from 'antd-mobile'
 useStrict(true)
 
 class Global {
-  @observable mobile
-  @observable register
-
-  constructor() {
-    this.mobile = ''
-    this.register = false
-  }
+  @observable mobile = ''
+  @observable register = false
+  @observable authCode = ''
 
   @action.bound
   async isExist() {
@@ -40,6 +36,16 @@ class Global {
       } else {
         Toast.fail('系统异常', 2)
       }
+    }
+  }
+
+  @action.bound
+  async sendAuthCode(mobile) {
+    try {
+      Toast.success('发送成功', 1)
+      await Axios.get(`/api/sendAuthCode/${mobile}`)
+    } catch (err) {
+      Toast.fail('系统异常', 2)
     }
   }
 }

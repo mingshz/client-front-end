@@ -2,27 +2,66 @@ import React, { Component } from 'react'
 import { createForm } from 'rc-form'
 import classNames from 'classnames'
 import { inject, observer } from 'mobx-react'
+import { withRouter } from 'react-router'
+import { Icon } from 'antd-mobile'
 import styles from './Join.css'
 
-@inject(({ global }) => ({
+@withRouter
+@inject(({ global, status, auth }) => ({
   isExist: global.isExist,
-  mobile: global.mobile
+  sendAuthCode: global.sendAuthCode,
+  mobile: global.mobile,
+  loading: status.loading,
+  login: auth.asyncLogin
 }))
 @observer
 class JoinContent extends Component {
   constructor(props) {
     super(props)
-    this.state = { isDisabled: true }
+    this.state = {
+      isDisabled: true,
+      buttonText: '发送'
+    }
   }
+
   componentDidMount() {
     this.props.isExist()
   }
 
   submit = () => {
     this.props.form.validateFields((error, value) => {
-      console.log(error, value)
+      if (error) return
+      this.props.login(value).then(() => {
+        this.props.history.push('/')
+      })
     })
   }
+
+  sendAuthMsg = () => {
+    const mobile = this.props.form.getFieldValue('mobile')
+    this.props.sendAuthCode(mobile)
+    this.setState({
+      isDisabled: true
+    })
+    this.countDown()
+  }
+
+  countDown = () => {
+    let time = 60
+    let t = setInterval(() => {
+      this.setState({
+        buttonText: `${time--}s`
+      })
+      if (time === -1) {
+        clearInterval(t)
+        this.setState({
+          isDisabled: false,
+          buttonText: '发送'
+        })
+      }
+    }, 1000)
+  }
+
   isCanSend = e => {
     if (/^(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/.test(e.target.value)) {
       this.setState({
@@ -51,11 +90,8 @@ class JoinContent extends Component {
     }
   }
   render() {
-<<<<<<< HEAD
-    const { mobile } = this.props
-=======
-    const { isDisabled } = this.state
-    const { mobile } = this.props
+    const { isDisabled, buttonText } = this.state
+    const { mobile, loading } = this.props
     const { getFieldProps, getFieldError } = this.props.form
 
     const mobileProps = getFieldProps('mobile', {
@@ -73,7 +109,6 @@ class JoinContent extends Component {
       rules: [{ required: true, message: '请输入验证码' }]
     })
 
->>>>>>> 180d024a1de9cae470493af17db6e45ef8388956
     return (
       <div className={classNames(styles.main, 'main')}>
         <div className={classNames(styles.header, 'clearfix')}>
@@ -91,8 +126,8 @@ class JoinContent extends Component {
             >
               <label>会员手机</label>
               <input {...mobileProps} placeholder="请输入您的手机号" type="text" />
-              <button type="button" className={styles.sendMsgBtn} disabled={isDisabled}>
-                发送
+              <button type="button" className={styles.sendMsgBtn} disabled={isDisabled} onClick={this.sendAuthMsg}>
+                {buttonText}
               </button>
               {getFieldError('mobile') ? <span className={styles.inputError}>{getFieldError('mobile')}</span> : null}
             </div>
@@ -167,8 +202,9 @@ class JoinContent extends Component {
               </div>
             ) : null}
             <div className={styles.submitButton}>
-              <button type="button" onClick={this.submit}>
-                开启锋尚来美
+              <button type="button" onClick={this.submit} disabled={loading}>
+                {loading ? <Icon type="loading" size="xs" /> : null}
+                <span>开启锋尚来美</span>
               </button>
             </div>
           </form>
