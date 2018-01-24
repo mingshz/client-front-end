@@ -61,8 +61,6 @@ class OrderListPage extends Component {
   }
 
   onEndReached = event => {
-    // load new data
-    // hasMore: from backend data, indicates whether it is the last page, here is false
     if (this.state.isLoading && !this.state.hasMore) {
       return
     }

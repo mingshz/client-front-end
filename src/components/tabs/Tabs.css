@@ -6,6 +6,7 @@
   display: flex;
   background-image: linear-gradient(-180deg, #363a43 0%, #27272f 100%);
   box-shadow: 0 -10px 40px 0 rgba(0, 0, 0, 0.3);
+  z-index: 999;
 }
 :local .tabItem {
   position: relative;
@@ -28,6 +29,9 @@
   color: #383838;
   transform-origin: 0 0;
   transform: scaleX(0.5);
+}
+:local .tabItem > a {
+  display: block;
 }
 :local .tabWrap {
   padding-bottom: 0.13rem;

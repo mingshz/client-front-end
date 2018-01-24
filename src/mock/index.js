@@ -39,3 +39,83 @@ mock.onPost(/\/api\/auth/).reply(config => {
     }, 1000)
   })
 })
+
+mock.onGet(/\/api\/user/).reply(
+  200,
+  Mock.mock({
+    resCode: 200,
+    resMsg: 'OK',
+    data: {
+      avatar: 'https://sfault-avatar.b0.upaiyun.com/885/222/885222425-582560bf7c6af_huge256',
+      name: '@cfirst()先生',
+      mobile: /^(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/,
+      balance: '@float(10000, 1000000, 2,2)',
+      isMember: '@boolean',
+      isRepresent: '@boolean'
+    }
+  })
+)
+
+mock.onGet(/\/api\/items/).reply(config => {
+  if (config.params.itemType === 'HOT') {
+    return [
+      200,
+      Mock.mock({
+        resCode: 200,
+        resMsg: 'OK',
+        data: {
+          pagination: {
+            current: 1,
+            total: 1,
+            pageSize: 10
+          },
+          'list|10': [
+            {
+              itemId: '@id',
+              thumbnail:
+                'https://g-search3.alicdn.com/img/bao/uploaded/i4/i1/62871920/TB23sk4cwnH8KJjSspcXXb3QFXa_!!62871920.jpg_230x230.jpg',
+              title: '@ctitle',
+              address: '@county',
+              type: '@pick(["洗车","餐饮","美容","维修"])',
+              distance: '',
+              vipPrice: function() {
+                return (this.originalPrice - 999).toFixed(2)
+              },
+              originalPrice: '@float(1000, 2000, 2,2)'
+            }
+          ]
+        }
+      })
+    ]
+  } else {
+    return [
+      200,
+      Mock.mock({
+        resCode: 200,
+        resMsg: 'OK',
+        data: {
+          pagination: {
+            current: 1,
+            total: 1,
+            pageSize: 10
+          },
+          'list|10': [
+            {
+              itemId: '@id',
+              thumbnail:
+                'https://g-search3.alicdn.com/img/bao/uploaded/i4/i1/62871920/TB23sk4cwnH8KJjSspcXXb3QFXa_!!62871920.jpg_230x230.jpg',
+              title: '收藏收藏收藏',
+              address: '@county',
+              type: '@pick(["洗车","餐饮","美容","维修"])',
+              distance: '',
+              vipPrice: function() {
+                return (this.originalPrice - 999).toFixed(2)
+              },
+              originalPrice: '@float(1000, 2000, 2,2)'
+            }
+          ]
+        }
+      })
+    ]
+  }
+})

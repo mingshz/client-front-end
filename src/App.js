@@ -4,6 +4,8 @@ import Async from 'react-code-splitting'
 import { useStrict } from 'mobx'
 import { Provider } from 'mobx-react'
 
+const Items = props => <Async load={import('./pages/items')} componentProps={props}/>
+
 useStrict(true)
 class App extends Component {
   render() {
@@ -19,9 +21,9 @@ class App extends Component {
             {/* 会员卡 */}
             <Route path="/vip" exact component={() => <Async load={import('./pages/vip')} />} />
             {/* 项目列表 */}
-            <Route path="/items" exact component={() => <Async load={import('./pages/items')} />} />
+            <Route path="/items" component={Items} />
             {/* 项目详情 */}
-            <Route path="/items/:itemId" exact component={() => <Async load={import('./pages/items/Detail')} />} />
+            {/* <Route path="/items/:itemId" exact component={() => <Async load={import('./pages/items/Detail')} />} /> */}
             {/* 支付成功 */}
             <Route path="/success" exact component={() => <Async load={import('./pages/payment/Success')} />} />
             {/* 支付页面 */}
