@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { createForm } from 'rc-form'
 import classNames from 'classnames'
+import { when } from 'mobx'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router'
 import { Icon } from 'antd-mobile'
@@ -12,7 +13,8 @@ import styles from './Join.css'
   sendAuthCode: global.sendAuthCode,
   mobile: global.mobile,
   loading: status.loading,
-  login: auth.asyncLogin
+  login: auth.loginHandler,
+  isLogin: auth.isLogin
 }))
 @observer
 class JoinContent extends Component {
@@ -26,14 +28,19 @@ class JoinContent extends Component {
 
   componentDidMount() {
     this.props.isExist()
+
+    when(
+      () => this.props.isLogin,
+      () => {
+        this.props.history.push('/')
+      }
+    )
   }
 
   submit = () => {
     this.props.form.validateFields((error, value) => {
       if (error) return
-      this.props.login(value).then(() => {
-        this.props.history.push('/')
-      })
+      this.props.login(value)
     })
   }
 
@@ -203,7 +210,7 @@ class JoinContent extends Component {
             ) : null}
             <div className={styles.submitButton}>
               <button type="button" onClick={this.submit} disabled={loading}>
-                {!loading ? <Icon type="loading" size="xs" /> : null}
+                {loading ? <Icon type="loading" size="xs" /> : null}
                 <span>开启锋尚来美</span>
               </button>
             </div>
