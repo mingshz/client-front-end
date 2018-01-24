@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styles from './Personal.css'
 
 const Personal = props => {
@@ -24,16 +25,22 @@ const Personal = props => {
       <div className={styles.list}>
         <ul>
           <li>
-            <i className="iconfont icon-order"></i>
-            <p>订单列表</p>
+            <Link to="/orders">
+              <i className="iconfont icon-order" />
+              <p>订单列表</p>
+            </Link>
           </li>
           <li>
-            <i className="iconfont icon-like"></i>
-            <p>最新推荐</p>
+            <Link to="/items">
+              <i className="iconfont icon-like" />
+              <p>最新推荐</p>
+            </Link>
           </li>
           <li>
-            <i className="iconfont icon-recharge"></i>
-            <p>充值</p>
+            <Link to="/deposit">
+              <i className="iconfont icon-recharge" />
+              <p>充值</p>
+            </Link>
           </li>
         </ul>
       </div>

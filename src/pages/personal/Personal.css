@@ -57,7 +57,7 @@
 :local .list {
   padding: 2.4rem 0.91rem 0;
 }
-:local .list li {
+:local .list li a {
   display: flex;
   margin-bottom: 0.59rem;
   align-items: center;
