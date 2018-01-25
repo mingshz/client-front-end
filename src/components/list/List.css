@@ -4,6 +4,9 @@
   display: flex;
   background: #fff;
 }
+:local .list a {
+  display: flex;
+}
 :local .list:last-child {
   margin-bottom: 0;
 }

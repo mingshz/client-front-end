@@ -23,7 +23,7 @@ class App extends Component {
             {/* 项目列表 */}
             <Route path="/items" component={Items} />
             {/* 项目详情 */}
-            {/* <Route path="/items/:itemId" exact component={() => <Async load={import('./pages/items/Detail')} />} /> */}
+            <Route path="/detail/item/:itemId" component={() => <Async load={import('./pages/items/Detail')} />} />
             {/* 支付成功 */}
             <Route path="/success" exact component={() => <Async load={import('./pages/payment/Success')} />} />
             {/* 支付页面 */}

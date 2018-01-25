@@ -11,6 +11,7 @@ const Tabs = props => {
         <div className={styles.tabItem} key={i}>
           <Link
             to={`/items${v.path}`}
+            replace
             className={classNames({
               [styles.tabWrap]: !v.isActive,
               [styles.active]: v.isActive

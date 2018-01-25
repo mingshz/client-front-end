@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
-import { ListView } from 'antd-mobile'
-import { inject, observer } from 'mobx-react'
+import { ListView, Toast } from 'antd-mobile'
+import Axios from 'axios'
 import List from '../../components/list'
 
-@inject(({ items }) => ({
-  getItems: items.getItems
-}))
-@observer
 class FavoriteItemsPage extends Component {
   constructor(props) {
     super(props)
@@ -21,39 +17,41 @@ class FavoriteItemsPage extends Component {
       page: 1
     }
   }
-
-  componentDidMount() {
-    this.props.getItems({ itemType: this.state.itemType, page: this.state.page, pageSize: 10 }).then(res => {
-      if (res.data.list.length === 10) {
-        let page = this.state.page
-        this.setState({
-          page: ++page
-        })
-      }
-      this.rData = res.data.list
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.rData),
-        isLoading: false
-      })
+  getItems = () => {
+    Axios.get('/api/items', {
+      params: { itemType: this.state.itemType, page: this.state.page, pageSize: 10 }
     })
+      .then(res => {
+        let list = res.data.data.list
+        if (this.state.page === 1) {
+          this.rData = list
+        } else {
+          this.rData = this.rData.concat(list)
+        }
+        if (list.length === 10) {
+          let page = this.state.page
+          this.setState({
+            page: ++page
+          })
+        }
+
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(this.rData),
+          isLoading: false
+        })
+      })
+      .catch(err => {
+        Toast.fail('系统异常', 2)
+      })
+  }
+  componentDidMount() {
+    this.getItems()
   }
 
   onEndReached = event => {
     if (this.state.isLoading) return
     this.setState({ isLoading: true })
-    this.props.getItems({ itemType: this.state.itemType, page: this.state.page, pageSize: 10 }).then(res => {
-      if (res.data.list.length === 10) {
-        let page = this.state.page
-        this.setState({
-          page: ++page
-        })
-      }
-      this.rData = this.rData.concat(res.data.list)
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.rData),
-        isLoading: false
-      })
-    })
+    this.getItems()
   }
 
   render() {

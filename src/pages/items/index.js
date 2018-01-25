@@ -1,25 +1,25 @@
 import React, { Component } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import Async from 'react-code-splitting'
 import styles from './Item.css'
 import Tabs from '../../components/tabs'
-const Hot = props => <Async load={import('./Hot')} componentProps={props}/>
-const Favorite = props => <Async load={import('./Favorite')} componentProps={props}/>
+const Hot = props => <Async load={import('./Hot')} componentProps={props} />
+const Favorite = props => <Async load={import('./Favorite')} componentProps={props} />
 class Items extends Component {
   render() {
-    const { pathname } = this.props.location
+    const { location, match } = this.props
     const TabList = [
       {
         path: '/hot',
         text: '最热',
         icon: 'hot-o',
-        isActive: pathname === '/items/hot'
+        isActive: location.pathname === '/items/hot'
       },
       {
         path: '/favorite',
         text: '收藏',
         icon: 'favorite-o',
-        isActive: pathname === '/items/favorite'
+        isActive: location.pathname === '/items/favorite'
       }
       // {
       //   path: '/nearby',
@@ -33,8 +33,9 @@ class Items extends Component {
         <Tabs data={TabList} />
         <div className={styles.list}>
           <Switch>
-            <Route path="/items/hot" component={Hot} />
-            <Route path="/items/favorite" component={Favorite} />
+            <Redirect path={match.path} exact to={`${match.path}/hot`} />
+            <Route path={`${match.path}/hot`} exact replace component={Hot} />
+            <Route path={`${match.path}/favorite`} exact replace component={Favorite} />
           </Switch>
         </div>
       </div>
