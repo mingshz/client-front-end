@@ -1,41 +1,7 @@
 import React, { Component } from 'react'
-import { ListView } from 'antd-mobile'
+import { ListView, Toast } from 'antd-mobile'
+import Axios from 'axios'
 import OrderList from '../../components/order/Order'
-
-const data = i => {
-  const time = +new Date()
-  const random = Math.round(Math.random() * 10)
-  return {
-    orderId: time + i,
-    completeTime: `2017-12-${i} 22:30`,
-    orderStatus: '已支付',
-    orderStatusCode: 0,
-    store: '龙湖天街店',
-    payer: '常先生',
-    payerMobile: '156***7176',
-    items: [
-      {
-        itemId: time + i,
-        thumbnail: `http://iph.href.lu/120x120?text=${i+1}`,
-        title: '全车内饰清洁赠车内空气净化套餐',
-        quantity: 3 + random,
-        vipPrice: 286.99 + random,
-        originalPrice: 1000.99 + +random
-      }
-    ]
-  }
-}
-const NUM_ROWS = 10
-let pageIndex = 0
-
-function genData(pIndex = 0) {
-  const dataBlob = []
-  for (let i = 0; i < NUM_ROWS; i++) {
-    const ii = pIndex * NUM_ROWS + i
-    dataBlob.push(data(ii))
-  }
-  return dataBlob
-}
 
 class OrderListPage extends Component {
   constructor(props) {
@@ -46,33 +12,46 @@ class OrderListPage extends Component {
 
     this.state = {
       dataSource,
-      isLoading: true
+      isLoading: true,
+      orderType: 'MEMBER',
+      page: 1
     }
   }
+  getOrders = () => {
+    Axios.get('/api/orders', {
+      params: { orderType: this.state.orderType, page: this.state.page, pageSize: 10 }
+    })
+      .then(res => {
+        let list = res.data.data.list
+        if (this.state.page === 1) {
+          this.rData = list
+        } else {
+          this.rData = this.rData.concat(list)
+        }
+        if (list.length === 10) {
+          let page = this.state.page
+          this.setState({
+            page: ++page
+          })
+        }
 
-  componentDidMount() {
-    setTimeout(() => {
-      this.rData = genData()
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.rData),
-        isLoading: false
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(this.rData),
+          isLoading: false
+        })
       })
-    }, 100)
+      .catch(err => {
+        Toast.fail('系统异常', 2)
+      })
+  }
+  componentDidMount() {
+    this.getOrders()
   }
 
   onEndReached = event => {
-    if (this.state.isLoading && !this.state.hasMore) {
-      return
-    }
+    if (this.state.isLoading) return
     this.setState({ isLoading: true })
-
-    setTimeout(() => {
-      this.rData = this.rData.concat(genData(++pageIndex))
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.rData),
-        isLoading: false
-      })
-    }, 100)
+    this.getOrders()
   }
 
   render() {
@@ -86,14 +65,16 @@ class OrderListPage extends Component {
       />
     )
     const row = (rowData, sectionID, rowID) => {
-      return <OrderList order={rowData} hasFooter={false} isCool={12} />
+      return <OrderList order={rowData} hasFooter={false} />
     }
     return (
       <ListView
         ref={el => (this.lv = el)}
         dataSource={this.state.dataSource}
         renderFooter={() => (
-          <div style={{ padding: 10, textAlign: 'center', fontSize: '14px'}}>{this.state.isLoading ? '加载中...' : '加载更多'}</div>
+          <div style={{ padding: 10, textAlign: 'center', fontSize: '14px' }}>
+            {this.state.isLoading ? '加载中...' : '加载更多'}
+          </div>
         )}
         renderRow={row}
         renderSeparator={separator}

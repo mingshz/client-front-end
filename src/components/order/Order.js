@@ -21,10 +21,7 @@ const Order = props => {
         {order.items.map(item => (
           <div className={styles.item} key={item.itemId}>
             <div className={styles.itemHeader}>
-              <img
-                src={item.thumbnail}
-                alt={item.title}
-              />
+              <img src={item.thumbnail} alt={item.title} />
             </div>
             <div className={styles.itemBody}>
               <h4 className={styles.itemName}>{item.title}</h4>

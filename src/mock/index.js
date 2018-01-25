@@ -119,3 +119,46 @@ mock.onGet(/\/api\/items/).reply(config => {
     ]
   }
 })
+
+mock.onGet(/\/api\/orders/).reply(
+  200,
+  Mock.mock({
+    resCode: 200,
+    resMsg: 'OK',
+    data: {
+      pagination: {
+        current: 1,
+        total: 1,
+        pageSize: 10
+      },
+      'list|10': [
+        {
+          orderId: '@id',
+          completeTime: '@datetime("yyyy-MM-dd H:m")',
+          orderStatus: '已支付',
+          orderStatusCode: 0,
+          store: '@cword(3)店',
+          payer: '@cfirst()先生',
+          payerMobile: /^(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/,
+          'items|1-3': [
+            {
+              itemId: '@id',
+              thumbnail: function() {
+                let bgColor = Mock.Random.color()
+                let fontcolor = Mock.Random.hex()
+                let text = Mock.Random.character() + Mock.Random.cword()
+                return Mock.Random.image('120x120', bgColor, fontcolor, text)
+              },
+              title: '全车内饰清洁赠车内空气净化套餐',
+              quantity: '@integer(3, 20)',
+              vipPrice: function() {
+                return (this.originalPrice - 999).toFixed(2)
+              },
+              originalPrice: '@float(1000, 2000, 2,2)'
+            }
+          ]
+        }
+      ]
+    }
+  })
+)
