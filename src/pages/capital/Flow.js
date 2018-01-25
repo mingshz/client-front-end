@@ -97,9 +97,11 @@ class Flow extends Component {
           <div className={styles.balance}>
             <div className={styles.number}>
               <span>&yen;</span>
-              {Number(user.balance)
-                .toFixed(2)
-                .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}
+              {user.balance
+                ? Number(user.balance)
+                    .toFixed(2)
+                    .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+                : null}
             </div>
             <button type="button" onClick={this.goToDeposit}>
               充值

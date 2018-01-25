@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 
-var mock = new MockAdapter(axios)
+var mock = new MockAdapter(axios, { delayResponse: 1000 })
 
 mock.onGet(/\/api\/isExist/).reply(200, {
   resCode: 200,
@@ -40,7 +40,7 @@ mock.onPost(/\/api\/auth/).reply(config => {
   })
 })
 
-mock.onGet(/\/api\/user/).reply(
+mock.onGet(/\/api\/user$/).reply(
   200,
   Mock.mock({
     resCode: 200,
@@ -120,7 +120,7 @@ mock.onGet(/\/api\/items/).reply(config => {
   }
 })
 
-mock.onGet(/\/api\/orders/).reply(
+mock.onGet(/\/api\/orders$/).reply(
   200,
   Mock.mock({
     resCode: 200,
@@ -193,6 +193,57 @@ mock.onGet(/\/api\/capital\/flow/).reply(
               return Mock.Random.id()
             }
           }
+        }
+      ]
+    }
+  })
+)
+
+mock.onGet(/\/api\/user\/vipCard/).reply(
+  200,
+  Mock.mock({
+    resCode: 200,
+    resMsg: 'OK',
+    data: {
+      orderId: '@id',
+      qrCode: 'http://image-1252688601.cossh.myqcloud.com/qrCode.jpg',
+      vipCard: function() {
+        return (
+          Mock.Random.integer(999, 9999).toString() +
+          Mock.Random.integer(999, 9999).toString() +
+          Mock.Random.integer(999, 9999).toString() +
+          Mock.Random.integer(999, 9999).toString() +
+          Mock.Random.integer(999, 9999).toString()
+        )
+      }
+    }
+  })
+)
+
+mock.onGet(/\/api\/orders\/(.*)/).reply(
+  200,
+  Mock.mock({
+    resCode: 200,
+    resMsg: 'OK',
+    data: {
+      orderId: '@id',
+      orderStatus: '@pick(["success", "forPay"])',
+      orderStatusMsg: function() {
+        if (this.orderStatus === 'success') {
+          return '已完成'
+        }
+        if (this.orderStatus === 'forPay') {
+          return '待付款'
+        }
+      },
+      'items|1-5': [
+        {
+          itemId: '@id',
+          thumbnail:
+            'https://g-search3.alicdn.com/img/bao/uploaded/i4/i1/62871920/TB23sk4cwnH8KJjSspcXXb3QFXa_!!62871920.jpg_230x230.jpg',
+          title: '@ctitle(5,10)',
+          quantity: '@integer(3, 20)',
+          amount: '@float(1000, 2000, 2,2)'
         }
       ]
     }
