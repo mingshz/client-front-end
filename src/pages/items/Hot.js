@@ -45,6 +45,7 @@ class HotItemsPage extends Component {
         Toast.fail('系统异常', 2)
       })
   }
+  
   componentDidMount() {
     this.getItems()
   }

@@ -162,3 +162,39 @@ mock.onGet(/\/api\/orders/).reply(
     }
   })
 )
+
+mock.onGet(/\/api\/capital\/flow/).reply(
+  200,
+  Mock.mock({
+    resCode: 200,
+    resMsg: 'OK',
+    data: {
+      pagination: {
+        current: 1,
+        total: 1,
+        pageSize: 10
+      },
+      'list|10': [
+        {
+          time: '@datetime("yyyy-MM-dd H:m")',
+          title: function() {
+            if (this.type) {
+              return '微信充值'
+            } else {
+              return Mock.Random.cword(3, 6) + '消费'
+            }
+          },
+          sum: '@float(100, 9000, 2,2)',
+          type: '@pick([0,1])',
+          orderId: function() {
+            if (this.type) {
+              return ''
+            } else {
+              return Mock.Random.id()
+            }
+          }
+        }
+      ]
+    }
+  })
+)
