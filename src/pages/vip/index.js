@@ -21,6 +21,7 @@ class Vip extends Component {
       () => this.props.orderId,
       () => {
         this.getOrderHandler(this.props.orderId)
+        localStorage.setItem('OrderId', this.props.orderId)
       }
     )
     when(

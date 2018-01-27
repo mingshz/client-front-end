@@ -221,7 +221,7 @@ mock.onGet(/\/api\/user\/vipCard/).reply(
 )
 
 mock.onGet(/\/api\/orders\/(.*)/).reply(config => {
-  if (config.params.wait > 10) {
+  if (config.params.wait > 5 || config.params.wait === -1) {
     return [
       200,
       Mock.mock({
