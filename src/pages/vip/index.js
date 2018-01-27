@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { withRouter } from 'react-router'
 import { when } from 'mobx'
 import styles from './Vip.css'
 
+@withRouter
 @inject(({ vip }) => ({
   qrCode: vip.qrCode,
   vipCard: vip.vipCard,
   orderId: vip.orderId,
   getVipInfo: vip.getVipInfo,
-  getOrderInfo: vip.getOrderInfo
+  getOrderInfo: vip.getOrderInfo,
+  pending: vip.pending
 }))
 @observer
 class Vip extends Component {
@@ -20,10 +23,24 @@ class Vip extends Component {
         this.getOrderHandler(this.props.orderId)
       }
     )
+    when(
+      () => !this.props.pending,
+      () => {
+        this.props.history.push('/payment')
+      }
+    )
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
   }
 
   getOrderHandler = orderId => {
-    this.props.getOrderInfo(orderId)
+    let wait = 1
+    this.timer = setInterval(() => {
+      console.log(`Now:${wait}`)
+      this.props.getOrderInfo(orderId, wait++)
+    }, 2000)
   }
   render() {
     const { qrCode, vipCard } = this.props

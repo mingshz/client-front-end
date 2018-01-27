@@ -32,15 +32,19 @@ class Auth {
   }
 
   @action.bound
-  async getOrderInfo(orderId) {
-    console.log(orderId)
+  async getOrderInfo(orderId, wait) {
     try {
       status.setLoading(true)
-      const { data } = await Axios.get(`/api/orders/${orderId}`)
+      const { data } = await Axios.get(`/api/orders/${orderId}`, {
+        params: {
+          wait: wait
+        }
+      })
       runInAction(() => {
-        this.order = data.data
-        console.log(data.data)
-        this.pending = false
+        if (Object.keys(data.data).length > 0) {
+          this.order = data.data
+          this.pending = false
+        }
       })
     } catch (err) {
       Toast.fail('系统异常', 2)
