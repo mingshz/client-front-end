@@ -262,3 +262,12 @@ mock.onGet(/\/api\/orders\/(.*)/).reply(config => {
     ]
   }
 })
+
+mock.onPut(/\/api\/payment/).reply(
+  200,
+  Mock.mock({
+    resCode: 200,
+    resMsg: 'OK',
+    data: {}
+  })
+)

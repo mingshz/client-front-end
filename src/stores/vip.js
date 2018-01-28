@@ -52,6 +52,12 @@ class Auth {
       status.setLoading(false)
     }
   }
+
+  @action.bound
+  setPending(val) {
+    console.log(val)
+    this.pending = val
+  }
 }
 
 export default new Auth()

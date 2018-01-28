@@ -32,6 +32,7 @@
 }
 :local .body {
   padding: 0 0.27rem;
+  margin-bottom: 2.13rem;
   background: #fff;
 }
 :local .footer {
