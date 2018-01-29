@@ -7,18 +7,25 @@ useStrict(true)
 
 class Payment {
   @observable isPay = false
+  @observable balance = 0
 
   @action.bound
   async payOrder(orderId) {
     try {
       status.setLoading(true)
-      const { data } = await Axios.put('/api/payment', { orderId: orderId })
-      console.log(data)
+      await Axios.put('/api/payment', { orderId: orderId })
       runInAction(() => {
         this.isPay = true
       })
     } catch (err) {
-      Toast.fail('系统异常', 2)
+      console.info(err.response)
+      if (err.response.status === 401) {
+        runInAction(() => {
+          this.balance = err.response.data.data.balance
+        })
+      } else {
+        Toast.fail('系统异常', 2)
+      }
     } finally {
       status.setLoading(false)
     }

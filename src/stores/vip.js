@@ -55,7 +55,6 @@ class Auth {
 
   @action.bound
   setPending(val) {
-    console.log(val)
     this.pending = val
   }
 }

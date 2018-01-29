@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import { when } from 'mobx'
+import { when, autorun } from 'mobx'
 import { withRouter } from 'react-router'
+import { Modal } from 'antd-mobile'
 import styles from './Payment.css'
 import List from '../../components/paymentList'
+
+const alert = Modal.alert
 
 @withRouter
 @inject(({ vip, payment }) => ({
@@ -13,7 +16,7 @@ import List from '../../components/paymentList'
   setPending: vip.setPending,
   isPay: payment.isPay,
   payOrder: payment.payOrder,
-  setIsPay: payment.setIsPay
+  balance: payment.balance
 }))
 @observer
 class Payment extends Component {
@@ -27,21 +30,43 @@ class Payment extends Component {
         this.props.history.replace('/success')
       }
     )
+    autorun(() => {
+      if (this.props.balance !== 0) {
+        console.log(this.props.balance)
+        sessionStorage.setItem('balance', this.props.balance)
+        this.alertInstance = alert('充值', '您的余额不足，是否充值？', [
+          {
+            text: '取消',
+            onPress: () => console.log('cancel'),
+            style: 'default'
+          },
+          {
+            text: '确定',
+            onPress: () => {
+              this.props.history.push({
+                pathname: '/deposit',
+                state: 'payment'
+              })
+            }
+          }
+        ])
+      }
+    })
   }
 
   componentWillUnmount() {
-    this.props.setIsPay(false)
-    this.props.setPending(true)
+    this.props.setPending(this.props.isPay)
+    if (this.props.balance !== 0) this.alertInstance.close()
   }
 
   refresh = () => {
     console.info('Debug: No OrderId && Refresh')
-    let orderId = localStorage.getItem('OrderId')
+    let orderId = sessionStorage.getItem('OrderId')
     this.props.getOrderInfo(orderId, -1)
   }
 
   payOrder = () => {
-    let orderId = localStorage.getItem('OrderId')
+    let orderId = sessionStorage.getItem('OrderId')
     this.props.payOrder(orderId)
   }
   render() {
@@ -50,7 +75,6 @@ class Payment extends Component {
     let total = 0
     if (order.items) {
       items = order.items.slice()
-      console.log(items)
       items.forEach(v => {
         total += v.amount * 100
       })

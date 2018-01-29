@@ -263,11 +263,26 @@ mock.onGet(/\/api\/orders\/(.*)/).reply(config => {
   }
 })
 
-mock.onPut(/\/api\/payment/).reply(
-  200,
-  Mock.mock({
-    resCode: 200,
-    resMsg: 'OK',
-    data: {}
-  })
-)
+mock.onPut(/\/api\/payment/).reply(config => {
+  if (Math.random() > 2) {
+    return [
+      200,
+      Mock.mock({
+        resCode: 200,
+        resMsg: 'OK',
+        data: {}
+      })
+    ]
+  } else {
+    return [
+      401,
+      Mock.mock({
+        resCode: 200,
+        resMsg: 'OK',
+        data: {
+          balance: '@float(100, 20000, 2,2)'
+        }
+      })
+    ]
+  }
+})

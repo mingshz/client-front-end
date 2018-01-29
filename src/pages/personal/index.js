@@ -13,9 +13,9 @@ class Personal extends Component {
     this.props.getUserInfo()
   }
 
-  
   render() {
     const { user } = this.props
+    console.log(user.balance)
     return (
       <div className="main">
         <div className={styles.header}>
@@ -30,9 +30,11 @@ class Personal extends Component {
         <div className={styles.capital}>
           <span>余额</span>
           <p>
-            {Number(user.balance)
-              .toFixed(2)
-              .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}
+            {user.balance
+              ? Number(user.balance)
+                  .toFixed(2)
+                  .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+              : '****.**'}
           </p>
         </div>
         <div className={styles.list}>
