@@ -150,7 +150,7 @@
   word-break: break-word;
   white-space: nowrap;
 }
-@media only screen and (min-width: 320px) and (max-width: 568px) and (-webkit-device-pixel-ratio: 2) {
+@media (max-height: 568px) and (-webkit-min-device-pixel-ratio: 2) {
   :local .inputError {
     bottom: -16px;
   }

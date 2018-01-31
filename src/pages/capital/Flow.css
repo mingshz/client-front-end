@@ -53,7 +53,7 @@
   padding: 3.73rem 0.27rem 0;
   height: 100vh;
 }
-@media only screen and (min-width: 320px) and (max-width: 568px) and (-webkit-device-pixel-ratio: 2) {
+@media (max-height: 568px) and (-webkit-min-device-pixel-ratio: 2) {
   :local .number {
     font-size: 36px;
   }

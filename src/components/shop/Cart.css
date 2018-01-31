@@ -4,7 +4,53 @@
   bottom: 0;
   left: 0;
   right: 0;
+  display: flex;
+  align-items: center;
   height: 1.28rem;
   line-height: 1.28rem;
   background-color: rgba(61, 61, 63, 0.9);
+}
+
+:local .icon {
+  position: absolute;
+  top: -0.27rem;
+  left: 0.32rem;
+  width: 1.33rem;
+  height: 1.33rem;
+  line-height: 1.33rem;
+  background: #363636;
+  border-radius: 100%;
+  text-align: center;
+}
+:local .icon i {
+  font-size: 34px;
+  color: #6f6f63;
+}
+:local .full {
+  background: #deb96b;
+}
+:local .full i {
+  color: #333;
+}
+:local .cartInfo {
+  flex: 1;
+  font-size: 20px;
+  color: #fff;
+}
+:local .cartButton {
+  width: 2.8rem;
+  height: 100%;
+  background-color: #535356;
+  color: #999;
+  font-size: 16px;
+  text-align: center;
+}
+:local .ready {
+  background: #deb96b;
+  color: #333;
+}
+@media (max-height: 568px) and (-webkit-min-device-pixel-ratio: 2) {
+  :local .icon i {
+    font-size: 30px;
+  }
 }
