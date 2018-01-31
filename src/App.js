@@ -35,6 +35,8 @@ class App extends Component {
             <Route path="/deposit" exact component={Deposit} />
             {/* 订单列表 */}
             <Route path="/orders" exact component={() => <Async load={import('./pages/order/OrderList')} />} />
+            {/* 商品地址 */}
+            <Route path="/shop" exact component={() => <Async load={import('./pages/store/Shop')} />} />
           </Switch>
         </BrowserRouter>
       </Provider>

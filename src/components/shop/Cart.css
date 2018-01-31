@@ -1,0 +1,10 @@
+:local .cart {
+  padding-left: 74px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1.28rem;
+  line-height: 1.28rem;
+  background-color: rgba(61, 61, 63, 0.9);
+}
