@@ -1,0 +1,13 @@
+# 构建编译环境
+FROM node AS builder
+
+ADD . /build/
+WORKDIR /build/
+RUN ["npm","install","--no-optional"]
+RUN ["npm","run","build"]
+
+# 构建运行环境
+
+FROM nginx
+COPY --from=builder /build/build /usr/share/nginx/html
+
