@@ -15,7 +15,6 @@ class Personal extends Component {
 
   render() {
     const { user } = this.props
-    console.log(user.balance)
     return (
       <div className="main">
         <div className={styles.header}>

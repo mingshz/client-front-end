@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Async from 'react-code-splitting'
 import { useStrict } from 'mobx'
 import { Provider } from 'mobx-react'
@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <Provider>
-        <BrowserRouter>
+        <HashRouter>
           <Switch>
             {/* 登录注册 */}
             <Route path="/join" exact component={() => <Async load={import('./pages/join')} />} />
@@ -38,7 +38,7 @@ class App extends Component {
             {/* 商品地址 */}
             <Route path="/shop" exact component={() => <Async load={import('./pages/store/Shop')} />} />
           </Switch>
-        </BrowserRouter>
+        </HashRouter>
       </Provider>
     )
   }

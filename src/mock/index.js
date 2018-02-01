@@ -263,7 +263,7 @@ mock.onGet(/\/api\/orders\/(.*)/).reply(config => {
   }
 })
 
-mock.onPut(/\/api\/payment/).reply(config => {
+mock.onPut(/\/api\/payment\/(.*)/).reply(config => {
   if (Math.random() > 2) {
     return [
       200,
