@@ -1,7 +1,9 @@
 :local .item {
+  margin-bottom: 0.27rem;
   display: flex;
   padding: 0.32rem;
   background: #fff;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.14), 0 3px 4px 0 rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 :local .hd {
   margin-right: 10px;
@@ -32,7 +34,42 @@
   -webkit-box-orient: vertical;
 }
 
+:local .region {
+  display: flex;
+  align-items: center;
+}
 :local .price {
   flex: 1;
   font-size: 16px;
+}
+:local .button {
+  flex: 1;
+  text-align: right;
+}
+:local .btnAdd,
+:local .btnMinus {
+  display: inline-block;
+  width: 0.65rem;
+  height: 0.65rem;
+  line-height: 0.62rem;
+  text-align: center;
+  border: 1px solid #b4b4b4;
+  color: #b4b4b4;
+  border-radius: 100%;
+  vertical-align: middle;
+  font-size: 24px;
+}
+:local .btnAdd {
+  color: #333;
+  background: #deb96b;
+  border: 1px solid #deb96b;
+}
+:local .quantity {
+  display: inline-block;
+  font-size: 15px;
+  min-width: 0.8rem;
+  height: 0.65rem;
+  line-height: 0.65rem;
+  text-align: center;
+  vertical-align: middle;
 }

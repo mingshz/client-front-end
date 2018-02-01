@@ -12,8 +12,13 @@ const Item = props => {
       </div>
       <div className={styles.bd}>
         <h4>一切的懂洗都是很不得玩具啊</h4>
-        <div className={styles.price}>
+        <div className={styles.region}>
           <div className={styles.price}>￥100元</div>
+          <div className={styles.button}>
+            <a href="javascript:;" className={styles.btnMinus}>&#8722;</a>
+            <span className={styles.quantity}>1</span>
+            <a href="javascript:;" className={styles.btnAdd}>&#43;</a>
+          </div>
         </div>
       </div>
     </div>

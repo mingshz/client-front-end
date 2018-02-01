@@ -9,6 +9,8 @@ class Shop extends Component {
       <div>
         <div className={styles.itemList}>
           <Item />
+          <Item />
+          <Item />
         </div>
         <Cart />
       </div>
