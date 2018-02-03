@@ -15,9 +15,13 @@ const Item = props => {
         <div className={styles.region}>
           <div className={styles.price}>￥100元</div>
           <div className={styles.button}>
-            <a href="javascript:;" className={styles.btnMinus}>&#8722;</a>
+            <a href="javascript:;" className={styles.btnMinus} onClick={props.minusItem.bind(null, '1111')}>
+              &#8722;
+            </a>
             <span className={styles.quantity}>1</span>
-            <a href="javascript:;" className={styles.btnAdd}>&#43;</a>
+            <a href="javascript:;" className={styles.btnAdd} onClick={props.addItem.bind(null, '2222')}>
+              &#43;
+            </a>
           </div>
         </div>
       </div>
