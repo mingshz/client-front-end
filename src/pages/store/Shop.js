@@ -59,7 +59,6 @@ class Shop extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.match.params.orderId)
     this.getItems()
   }
 
@@ -70,7 +69,8 @@ class Shop extends Component {
   }
 
   render() {
-    const { addItem, minusItem, total, easyOrders, submitOrders } = this.props
+    const { addItem, minusItem, total, easyOrders, submitOrders, match } = this.props
+    const orderId = match.params.orderId
     const orders = toJS(easyOrders)
     const row = (rowData, sectionID, rowID) => {
       return <Item data={rowData} addItem={addItem} minusItem={minusItem} />
@@ -99,7 +99,14 @@ class Shop extends Component {
             scrollRenderAheadDistance={200}
           />
         </div>
-        <Cart total={total} orders={orders} addItem={addItem} minusItem={minusItem} submit={submitOrders} />
+        <Cart
+          total={total}
+          orders={orders}
+          addItem={addItem}
+          minusItem={minusItem}
+          submit={submitOrders}
+          orderId={orderId}
+        />
       </div>
     )
   }

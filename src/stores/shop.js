@@ -1,4 +1,7 @@
-import { observable, action, useStrict, toJS, extendObservable } from 'mobx'
+import { observable, action, useStrict, toJS, extendObservable, runInAction } from 'mobx'
+import Axios from 'axios'
+import { Toast } from 'antd-mobile'
+import history from '../utils/history'
 
 useStrict(true)
 
@@ -56,9 +59,25 @@ class Shop {
   }
 
   @action.bound
-  async submitOrders() {
+  async submitOrders(orderId) {
     if (!this.total) return
-    console.log(toJS(this.orders))
+    Toast.loading('提交中', 30)
+    try {
+      await Axios.post('/api/order', {
+        orderId: orderId,
+        items: toJS(this.orders)
+      })
+      Toast.hide()
+      history.push('/orders')
+      runInAction(() => {
+        this.easyOrders = {}
+        this.orders = []
+        this.total = 0
+      })
+    } catch (err) {
+      console.log(err)
+      Toast.fail('系统异常', 2)
+    }
   }
 }
 

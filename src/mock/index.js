@@ -57,7 +57,6 @@ mock.onGet(/\/api\/user$/).reply(
 )
 
 mock.onGet(/\/api\/items/).reply(config => {
-  console.log(config)
   if (config.params.itemType === 'HOT') {
     return [
       200,
@@ -287,3 +286,12 @@ mock.onPut(/\/api\/payment\/(.*)/).reply(config => {
     ]
   }
 })
+
+mock.onPost(/\/api\/order/).reply(
+  200,
+  Mock.mock({
+    resCode: 200,
+    resMsg: 'OK',
+    data: null
+  })
+)

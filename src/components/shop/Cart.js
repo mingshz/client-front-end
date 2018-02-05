@@ -33,7 +33,7 @@ class Cart extends Component {
   }
 
   render() {
-    const { total, orders, submit } = this.props
+    const { total, orders, submit, orderId } = this.props
     let sum = 0
     let quantity = 0
     let newArray = []
@@ -84,7 +84,7 @@ class Cart extends Component {
           className={classNames(styles.cartButton, {
             [styles.ready]: total > 0
           })}
-          onClick={submit}
+          onClick={submit.bind(null, orderId)}
         >
           {total > 0 ? '去结算' : '准备下单'}
         </div>

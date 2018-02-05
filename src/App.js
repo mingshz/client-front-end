@@ -38,8 +38,6 @@ class App extends Component {
             <Route path="/orders" exact component={() => <Async load={import('./pages/order/OrderList')} />} />
             {/* 商品地址 */}
             <Route path="/shop/:orderId" exact component={Shop} />
-            {/* 测试 */}
-            <Route path="/test" exact component={() => <Async load={import('./pages/test/test')} />} />
           </Switch>
         </HashRouter>
       </Provider>
