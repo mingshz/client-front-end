@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ListView, Toast } from 'antd-mobile'
 import { inject, observer } from 'mobx-react'
+import { toJS } from 'mobx'
 import Axios from 'axios'
 import Item from '../../components/shop/Item'
 import Cart from '../../components/shop/Cart'
@@ -8,7 +9,10 @@ import styles from './Shop.css'
 
 @inject(({ shop }) => ({
   addItem: shop.addItem,
-  minusItem: shop.minusItem
+  minusItem: shop.minusItem,
+  easyOrders: shop.easyOrders,
+  total: shop.total,
+  submitOrders: shop.submitOrders
 }))
 @observer
 class Shop extends Component {
@@ -21,7 +25,7 @@ class Shop extends Component {
     this.state = {
       dataSource,
       isLoading: true,
-      storeId: '123456',
+      storeId: this.props.match.params.orderId,
       page: 1
     }
   }
@@ -55,6 +59,7 @@ class Shop extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.match.params.orderId)
     this.getItems()
   }
 
@@ -65,8 +70,8 @@ class Shop extends Component {
   }
 
   render() {
-    const { addItem, minusItem } = this.props
-
+    const { addItem, minusItem, total, easyOrders, submitOrders } = this.props
+    const orders = toJS(easyOrders)
     const row = (rowData, sectionID, rowID) => {
       return <Item data={rowData} addItem={addItem} minusItem={minusItem} />
     }
@@ -94,7 +99,7 @@ class Shop extends Component {
             scrollRenderAheadDistance={200}
           />
         </div>
-        <Cart />
+        <Cart total={total} orders={orders} addItem={addItem} minusItem={minusItem} submit={submitOrders} />
       </div>
     )
   }

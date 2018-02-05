@@ -8,7 +8,8 @@
   align-items: center;
   height: 1.28rem;
   line-height: 1.28rem;
-  background-color: rgba(61, 61, 63, 0.9);
+  background-color: rgb(61, 61, 63);
+  z-index: 1000;
 }
 
 :local .icon {
@@ -48,6 +49,67 @@
 :local .ready {
   background: #deb96b;
   color: #333;
+}
+:local .cartNum {
+  border-radius: 50% 50%;
+  background-color: #fb4e44;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  font-size: 12px;
+  text-align: center;
+  position: absolute;
+  top: 2px;
+  right: 0;
+  color: #fff;
+  border: 1px solid #fff;
+  text-align: center;
+}
+.shop-order_list .am-list-header {
+  padding: 5px 15px 5px 15px;
+  font-size: 12px;
+  background: #f4f4f4;
+  text-align: left;
+}
+.shop-order_list .am-list-body {
+  padding-bottom: 1.71rem;
+  max-height: 6rem;
+  overflow: hidden;
+  overflow-y: auto;
+}
+.shop-order_name {
+  font-size: 15px;
+  color: #444;
+}
+.shop-order_btn {
+  float: right;
+}
+:local .quantity {
+  display: inline-block;
+  font-size: 15px;
+  min-width: 0.8rem;
+  height: 0.65rem;
+  line-height: 0.65rem;
+  text-align: center;
+  vertical-align: middle;
+}
+:local .btnMinus,
+:local .btnAdd {
+  display: inline-block;
+  width: 0.65rem;
+  height: 0.65rem;
+  line-height: 0.62rem;
+  text-align: center;
+  border: 1px solid #b4b4b4;
+  color: #b4b4b4;
+  border-radius: 100%;
+  vertical-align: middle;
+  font-size: 24px;
+}
+:local .btnAdd {
+  color: #333;
+  background: #deb96b;
+  border: 1px solid #deb96b;
 }
 @media (max-height: 568px) and (-webkit-min-device-pixel-ratio: 2) {
   :local .icon i {

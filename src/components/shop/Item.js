@@ -25,26 +25,24 @@ class Item extends Component {
   }
   render() {
     const { quantity } = this.state
+    const { data } = this.props
     return (
       <div className={styles.item}>
         <div className={styles.hd}>
-          <img
-            src="https://g-search3.alicdn.com/img/bao/uploaded/i4/i1/62871920/TB23sk4cwnH8KJjSspcXXb3QFXa_!!62871920.jpg_230x230.jpg"
-            alt="项目"
-          />
+          <img src={data.thumbnail} alt={data.title} />
         </div>
         <div className={styles.bd}>
-          <h4>一切的懂洗都是很不得玩具啊</h4>
+          <h4>{data.title}</h4>
           <div className={styles.region}>
-            <div className={styles.price}>￥100元</div>
+            <div className={styles.price}>￥{data.vipPrice}</div>
             <div className={styles.button}>
               {quantity > 0 ? (
-                <a href="javascript:;" className={styles.btnMinus} onClick={this.minusItem.bind(null, '1111')}>
+                <a href="javascript:;" className={styles.btnMinus} onClick={this.minusItem.bind(null, data)}>
                   &#8722;
                 </a>
               ) : null}
               {quantity > 0 ? <span className={styles.quantity}>{quantity}</span> : null}
-              <a href="javascript:;" className={styles.btnAdd} onClick={this.addItem.bind(null, '2222')}>
+              <a href="javascript:;" className={styles.btnAdd} onClick={this.addItem.bind(null, data)}>
                 &#43;
               </a>
             </div>
