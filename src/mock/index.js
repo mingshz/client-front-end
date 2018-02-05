@@ -79,7 +79,7 @@ mock.onGet(/\/api\/items/).reply(config => {
               type: '@pick(["洗车","餐饮","美容","维修"])',
               distance: '',
               vipPrice: function() {
-                return (this.originalPrice - 999).toFixed(2)
+                return Number((this.originalPrice - 999).toFixed(2))
               },
               originalPrice: '@float(1000, 2000, 2,2)'
             }
@@ -104,12 +104,12 @@ mock.onGet(/\/api\/items/).reply(config => {
               itemId: '@id',
               thumbnail:
                 'https://g-search3.alicdn.com/img/bao/uploaded/i4/i1/62871920/TB23sk4cwnH8KJjSspcXXb3QFXa_!!62871920.jpg_230x230.jpg',
-              title: '收藏收藏收藏',
+              title: '@ctitle()收藏',
               address: '@county',
               type: '@pick(["洗车","餐饮","美容","维修"])',
               distance: '',
               vipPrice: function() {
-                return (this.originalPrice - 999).toFixed(2)
+                return Number((this.originalPrice - 999).toFixed(2))
               },
               originalPrice: '@float(1000, 2000, 2,2)'
             }
@@ -152,7 +152,7 @@ mock.onGet(/\/api\/orders$/).reply(
               title: '全车内饰清洁赠车内空气净化套餐',
               quantity: '@integer(3, 20)',
               vipPrice: function() {
-                return (this.originalPrice - 999).toFixed(2)
+                return Number((this.originalPrice - 999).toFixed(2))
               },
               originalPrice: '@float(1000, 2000, 2,2)'
             }
@@ -286,3 +286,12 @@ mock.onPut(/\/api\/payment\/(.*)/).reply(config => {
     ]
   }
 })
+
+mock.onPost(/\/api\/order/).reply(
+  200,
+  Mock.mock({
+    resCode: 200,
+    resMsg: 'OK',
+    data: null
+  })
+)
