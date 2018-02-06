@@ -1,5 +1,5 @@
 import Mock from 'mockjs'
-import axios from 'axios'
+import axios from '../utils/request'
 import MockAdapter from 'axios-mock-adapter'
 
 var mock = new MockAdapter(axios, { delayResponse: 500 })
@@ -41,7 +41,7 @@ mock.onPost(/\/api\/auth/).reply(config => {
 })
 
 mock.onGet(/\/api\/user$/).reply(
-  200,
+  432,
   Mock.mock({
     resCode: 200,
     resMsg: 'OK',

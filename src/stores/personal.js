@@ -1,6 +1,6 @@
 import { observable, action, useStrict, runInAction } from 'mobx'
-import Axios from 'axios'
 import { Toast } from 'antd-mobile'
+import Axios from '../utils/request'
 
 useStrict(true)
 
@@ -12,7 +12,7 @@ class Personal {
     try {
       const { data } = await Axios.get('/api/user')
       runInAction(() => {
-        this.user = data.data
+        this.user = data
       })
     } catch (err) {
       Toast.fail('系统异常', 2)

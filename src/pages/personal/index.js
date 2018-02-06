@@ -19,11 +19,15 @@ class Personal extends Component {
       <div className="main">
         <div className={styles.header}>
           <div className={styles.hd}>
-            <img className={styles.avatar} alt="微信头像" src={user.avatar} />
+            <img
+              className={styles.avatar}
+              alt="微信头像"
+              src={user.avatar ? user.avatar : require('../../assets/logo.png')}
+            />
           </div>
           <div className={styles.bd}>
-            <h4>{user.name}</h4>
-            <p>{String(user.mobile).replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')}</p>
+            <h4>{user.name ? user.name : '***'}</h4>
+            <p>{user.mobile ? String(user.mobile).replace(/(\d{3})\d{4}(\d{4})/, '$1****$2') : '***********'}</p>
           </div>
         </div>
         <div className={styles.capital}>
