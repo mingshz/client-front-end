@@ -6,6 +6,7 @@ import { Provider } from 'mobx-react'
 
 const Items = props => <Async load={import('./pages/items')} componentProps={props} />
 const Deposit = props => <Async load={import('./pages/capital/Deposit')} componentProps={props} />
+const Shop = props => <Async load={import('./pages/store/Shop')} componentProps={props} />
 
 useStrict(true)
 class App extends Component {
@@ -18,7 +19,7 @@ class App extends Component {
             <Route path="/join" exact component={() => <Async load={import('./pages/join')} />} />
             {/* 个人中心 */}
             <Route path="/personal" exact component={() => <Async load={import('./pages/personal')} />} />
-            <Redirect from="/" exact to="/personal" />
+            {/* <Redirect from="/" exact to="/personal" /> */}
             {/* 会员卡 */}
             <Route path="/vip" exact component={() => <Async load={import('./pages/vip')} />} />
             {/* 项目列表 */}
@@ -36,7 +37,7 @@ class App extends Component {
             {/* 订单列表 */}
             <Route path="/orders" exact component={() => <Async load={import('./pages/order/OrderList')} />} />
             {/* 商品地址 */}
-            <Route path="/shop" exact component={() => <Async load={import('./pages/store/Shop')} />} />
+            <Route path="/shop/:orderId" exact component={Shop} />
           </Switch>
         </HashRouter>
       </Provider>

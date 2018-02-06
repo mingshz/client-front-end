@@ -16,7 +16,7 @@ class Auth {
   async getVipInfo() {
     try {
       status.setLoading(true)
-      const { data, config } = await Axios.get('/api/user/vipCard')
+      const { data, config } = await Axios.get('/user/vipCard')
       console.log(config.headers)
       runInAction(() => {
         this.qrCode = data.data.qrCode
@@ -35,7 +35,7 @@ class Auth {
   async getOrderInfo(orderId, wait) {
     try {
       status.setLoading(true)
-      const { data } = await Axios.get(`/api/orders/${orderId}`, {
+      const { data } = await Axios.get(`/orders/${orderId}`, {
         params: {
           wait: wait
         }

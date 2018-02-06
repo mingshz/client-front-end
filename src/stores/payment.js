@@ -13,7 +13,7 @@ class Payment {
   async payOrder(orderId) {
     try {
       status.setLoading(true)
-      await Axios.put(`/api/payment/${orderId}`)
+      await Axios.put(`/payment/${orderId}`)
       runInAction(() => {
         this.isPay = true
       })

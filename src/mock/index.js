@@ -1,16 +1,16 @@
 import Mock from 'mockjs'
-import axios from 'axios'
+import axios from '../utils/request'
 import MockAdapter from 'axios-mock-adapter'
 
 var mock = new MockAdapter(axios, { delayResponse: 500 })
 
-mock.onGet(/\/api\/isExist/).reply(200, {
+mock.onGet(/\/isExist/).reply(200, {
   resCode: 200,
   resMsg: 'OK',
   data: '15670001464'
 })
 
-mock.onGet(/\/api\/isRegister/).reply(
+mock.onGet(/\/isRegister/).reply(
   417,
   Mock.mock({
     resCode: 200,
@@ -19,7 +19,7 @@ mock.onGet(/\/api\/isRegister/).reply(
   })
 )
 
-mock.onGet(/\/api\/sendAuthCode/).reply(
+mock.onGet(/\/sendAuthCode/).reply(
   200,
   Mock.mock({
     resCode: 200,
@@ -28,7 +28,7 @@ mock.onGet(/\/api\/sendAuthCode/).reply(
   })
 )
 
-mock.onPost(/\/api\/auth/).reply(config => {
+mock.onPost(/\/auth/).reply(config => {
   return new Promise(function(resolve, reject) {
     setTimeout(function() {
       if (Math.random() > 0.5) {
@@ -40,8 +40,8 @@ mock.onPost(/\/api\/auth/).reply(config => {
   })
 })
 
-mock.onGet(/\/api\/user$/).reply(
-  200,
+mock.onGet(/\/user$/).reply(
+  432,
   Mock.mock({
     resCode: 200,
     resMsg: 'OK',
@@ -56,7 +56,7 @@ mock.onGet(/\/api\/user$/).reply(
   })
 )
 
-mock.onGet(/\/api\/items/).reply(config => {
+mock.onGet(/\/items/).reply(config => {
   if (config.params.itemType === 'HOT') {
     return [
       200,
@@ -79,7 +79,7 @@ mock.onGet(/\/api\/items/).reply(config => {
               type: '@pick(["洗车","餐饮","美容","维修"])',
               distance: '',
               vipPrice: function() {
-                return (this.originalPrice - 999).toFixed(2)
+                return Number((this.originalPrice - 999).toFixed(2))
               },
               originalPrice: '@float(1000, 2000, 2,2)'
             }
@@ -104,12 +104,12 @@ mock.onGet(/\/api\/items/).reply(config => {
               itemId: '@id',
               thumbnail:
                 'https://g-search3.alicdn.com/img/bao/uploaded/i4/i1/62871920/TB23sk4cwnH8KJjSspcXXb3QFXa_!!62871920.jpg_230x230.jpg',
-              title: '收藏收藏收藏',
+              title: '@ctitle()收藏',
               address: '@county',
               type: '@pick(["洗车","餐饮","美容","维修"])',
               distance: '',
               vipPrice: function() {
-                return (this.originalPrice - 999).toFixed(2)
+                return Number((this.originalPrice - 999).toFixed(2))
               },
               originalPrice: '@float(1000, 2000, 2,2)'
             }
@@ -120,7 +120,7 @@ mock.onGet(/\/api\/items/).reply(config => {
   }
 })
 
-mock.onGet(/\/api\/orders$/).reply(
+mock.onGet(/\/orders$/).reply(
   200,
   Mock.mock({
     resCode: 200,
@@ -152,7 +152,7 @@ mock.onGet(/\/api\/orders$/).reply(
               title: '全车内饰清洁赠车内空气净化套餐',
               quantity: '@integer(3, 20)',
               vipPrice: function() {
-                return (this.originalPrice - 999).toFixed(2)
+                return Number((this.originalPrice - 999).toFixed(2))
               },
               originalPrice: '@float(1000, 2000, 2,2)'
             }
@@ -163,7 +163,7 @@ mock.onGet(/\/api\/orders$/).reply(
   })
 )
 
-mock.onGet(/\/api\/capital\/flow/).reply(
+mock.onGet(/\/capital\/flow/).reply(
   200,
   Mock.mock({
     resCode: 200,
@@ -199,7 +199,7 @@ mock.onGet(/\/api\/capital\/flow/).reply(
   })
 )
 
-mock.onGet(/\/api\/user\/vipCard/).reply(
+mock.onGet(/\/user\/vipCard/).reply(
   200,
   Mock.mock({
     resCode: 200,
@@ -220,7 +220,7 @@ mock.onGet(/\/api\/user\/vipCard/).reply(
   })
 )
 
-mock.onGet(/\/api\/orders\/(.*)/).reply(config => {
+mock.onGet(/\/orders\/(.*)/).reply(config => {
   if (config.params.wait > 5 || config.params.wait === -1) {
     return [
       200,
@@ -263,7 +263,7 @@ mock.onGet(/\/api\/orders\/(.*)/).reply(config => {
   }
 })
 
-mock.onPut(/\/api\/payment\/(.*)/).reply(config => {
+mock.onPut(/\/payment\/(.*)/).reply(config => {
   if (Math.random() > 2) {
     return [
       200,
@@ -286,3 +286,12 @@ mock.onPut(/\/api\/payment\/(.*)/).reply(config => {
     ]
   }
 })
+
+mock.onPost(/\/order/).reply(
+  200,
+  Mock.mock({
+    resCode: 200,
+    resMsg: 'OK',
+    data: null
+  })
+)
