@@ -26,7 +26,7 @@ service.interceptors.response.use(
     // 微信未授权
     if (error.response.status === 431) {
       const { origin, href } = window.location
-      window.location.replace(`${origin}/api/auth?redirectUrl=${encodeURIComponent(href)}`)
+      window.location.replace(`${origin}/auth?redirectUrl=${encodeURIComponent(href)}`)
     }
     if (error.response.status === 432) {
       history.push('/join')

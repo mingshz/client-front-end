@@ -63,7 +63,7 @@ class Shop {
     if (!this.total) return
     Toast.loading('提交中', 30)
     try {
-      await Axios.post('/api/order', {
+      await Axios.post('/order', {
         orderId: orderId,
         items: toJS(this.orders)
       })

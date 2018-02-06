@@ -10,7 +10,7 @@ class Personal {
   @action.bound
   async getUserInfo() {
     try {
-      const { data } = await Axios.get('/api/user')
+      const { data } = await Axios.get('/user')
       runInAction(() => {
         this.user = data
       })

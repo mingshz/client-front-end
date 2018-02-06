@@ -31,7 +31,7 @@ class Shop extends Component {
   }
 
   getItems = () => {
-    Axios.get('/api/items', {
+    Axios.get('/items', {
       params: { storeId: this.state.storeId, page: this.state.page, pageSize: 10 }
     })
       .then(res => {

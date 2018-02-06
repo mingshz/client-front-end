@@ -27,7 +27,7 @@ class Flow extends Component {
   }
 
   getFlow = () => {
-    Axios.get('/api/capital/flow', {
+    Axios.get('/capital/flow', {
       params: { page: this.state.page, pageSize: 10 }
     })
       .then(res => {

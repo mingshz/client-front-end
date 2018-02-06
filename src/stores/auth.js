@@ -12,7 +12,7 @@ class Auth {
   async loginHandler(userInfo) {
     try {
       status.setLoading(true)
-      await Axios.post('/api/auth', userInfo)
+      await Axios.post('/auth', userInfo)
       runInAction(() => {
         this.isLogin = true
       })

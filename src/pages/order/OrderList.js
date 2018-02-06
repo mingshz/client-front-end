@@ -18,7 +18,7 @@ class OrderListPage extends Component {
     }
   }
   getOrders = () => {
-    Axios.get('/api/orders', {
+    Axios.get('/orders', {
       params: { orderType: this.state.orderType, page: this.state.page, pageSize: 10 }
     })
       .then(res => {

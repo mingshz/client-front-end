@@ -12,7 +12,7 @@ class Global {
   @action.bound
   async isExist() {
     try {
-      const { data } = await Axios.get('/api/isExist')
+      const { data } = await Axios.get('/isExist')
       runInAction(() => {
         this.mobile = data.data
       })
@@ -24,7 +24,7 @@ class Global {
   @action.bound
   async isRegister(mobile) {
     try {
-      await Axios.get(`/api/isRegister/${mobile}`)
+      await Axios.get(`/isRegister/${mobile}`)
       runInAction(() => {
         this.register = false
       })
@@ -43,7 +43,7 @@ class Global {
   async sendAuthCode(mobile) {
     try {
       Toast.success('发送成功', 1)
-      await Axios.get(`/api/sendAuthCode/${mobile}`)
+      await Axios.get(`/sendAuthCode/${mobile}`)
     } catch (err) {
       Toast.fail('系统异常', 2)
     }

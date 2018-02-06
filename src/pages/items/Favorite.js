@@ -18,7 +18,7 @@ class FavoriteItemsPage extends Component {
     }
   }
   getItems = () => {
-    Axios.get('/api/items', {
+    Axios.get('/items', {
       params: { itemType: this.state.itemType, page: this.state.page, pageSize: 10 }
     })
       .then(res => {
