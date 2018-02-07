@@ -30,7 +30,7 @@ mock.onGet(/\/user$/).reply(200, {
   enabled: true
 })
 
-mock.onGet(/\/items/).reply(config => {
+mock.onGet(/\/items$/).reply(config => {
   if (config.params.itemType === 'HOT') {
     return [
       200,
@@ -214,3 +214,20 @@ mock.onPut(/\/payment\/(.*)/).reply(config => {
 })
 
 mock.onPost(/\/order/).reply(200, {})
+
+mock.onGet(/\/items\/(.*)/).reply(
+  200,
+  Mock.mock({
+    itemId: '@id',
+    thumbnail: 'http://image-1252688601.cossh.myqcloud.com/item.png',
+    title: '@ctitle(20)',
+    address: '@county(true)',
+    tel: '0571-11112222',
+    type: '洗车',
+    distance: 1000,
+    vipPrice: '@float(200, 900, 2,2)',
+    originalPrice: '@float(1000, 2000, 2,2)',
+    details:
+      '<img src="https://img.alicdn.com/imgextra/i4/55285307/TB2oyE9h0fJ8KJjy0FeXXXKEXXa_!!55285307.jpg" alt="xxx" /><p>这个分不差饭随爱豆饭随爱豆发大水发大水发大水佛挡杀佛大厦发送发送。发大水发送，发大水啥都。</p><img src="http://image-1252688601.cossh.myqcloud.com/item.png" alt="item" />'
+  })
+)

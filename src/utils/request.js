@@ -26,14 +26,17 @@ service.interceptors.response.use(
     return res
   },
   error => {
+    console.log(error)
     // 微信未授权
     if (error.response.status === 431) {
       const { origin, href } = window.location
       window.location.replace(`${origin}/auth?redirectUrl=${encodeURIComponent(href)}`)
+      return
     }
     // 未注册
     if (error.response.status === 433) {
       history.push('/join')
+      return
     }
     return Promise.reject(error)
   }
