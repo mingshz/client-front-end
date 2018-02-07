@@ -5,7 +5,6 @@ import vip from './vip'
 import payment from './payment'
 import status from './status'
 import shop from './shop'
-import test from './test'
 
 export default {
   global,
@@ -14,6 +13,5 @@ export default {
   personal,
   vip,
   payment,
-  shop,
-  test
+  shop
 }

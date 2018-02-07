@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { createForm } from 'rc-form'
 import classNames from 'classnames'
-import { when } from 'mobx'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router'
 import { Icon } from 'antd-mobile'
@@ -12,8 +11,7 @@ import styles from './Join.css'
   sendAuthCode: global.sendAuthCode,
   mobile: global.mobile,
   loading: status.loading,
-  login: auth.loginHandler,
-  isLogin: auth.isLogin
+  login: auth.loginHandler
 }))
 @observer
 class JoinContent extends Component {
@@ -23,15 +21,6 @@ class JoinContent extends Component {
       isDisabled: true,
       buttonText: '发送'
     }
-  }
-
-  componentDidMount() {
-    when(
-      () => this.props.isLogin,
-      () => {
-        this.props.history.push('/')
-      }
-    )
   }
 
   submit = () => {
