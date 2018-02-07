@@ -15,6 +15,7 @@ class Personal extends Component {
 
   render() {
     const { user } = this.props
+    console.log(user)
     return (
       <div className="main">
         <div className={styles.header}>
@@ -42,6 +43,14 @@ class Personal extends Component {
         </div>
         <div className={styles.list}>
           <ul>
+            {user.storeId ? (
+              <li>
+                <Link to="/store/orders/all">
+                  <i className="iconfont icon-shop-order" />
+                  <p>销售订单</p>
+                </Link>
+              </li>
+            ) : null}
             <li>
               <Link to="/orders">
                 <i className="iconfont icon-order" />
