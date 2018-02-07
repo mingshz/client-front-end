@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { HashRouter, Route, Switch } from 'react-router-dom'
 import Async from 'react-code-splitting'
 import { useStrict } from 'mobx'
 import { Provider } from 'mobx-react'

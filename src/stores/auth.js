@@ -1,21 +1,18 @@
-import { observable, action, useStrict, runInAction } from 'mobx'
-import Axios from 'axios'
+import { action, useStrict } from 'mobx'
 import { Toast } from 'antd-mobile'
 import status from './status'
+import Axios from '../utils/request'
+import history from '../utils/history'
 
 useStrict(true)
 
 class Auth {
-  @observable isLogin = false
-
   @action.bound
   async loginHandler(userInfo) {
     try {
       status.setLoading(true)
       await Axios.post('/auth', userInfo)
-      runInAction(() => {
-        this.isLogin = true
-      })
+      history.push('/personal')
     } catch (err) {
       Toast.fail('系统异常', 2)
     } finally {

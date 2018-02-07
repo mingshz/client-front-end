@@ -1,5 +1,5 @@
 import { observable, action, useStrict, toJS, extendObservable, runInAction } from 'mobx'
-import Axios from 'axios'
+import Axios from '../utils/request'
 import { Toast } from 'antd-mobile'
 import history from '../utils/history'
 

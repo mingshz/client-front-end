@@ -8,7 +8,6 @@ const service = axios.create({
 
 service.interceptors.request.use(
   config => {
-    console.log(config)
     return config
   },
   error => {
@@ -28,7 +27,7 @@ service.interceptors.response.use(
       const { origin, href } = window.location
       window.location.replace(`${origin}/auth?redirectUrl=${encodeURIComponent(href)}`)
     }
-    if (error.response.status === 432) {
+    if (error.response.status === 433) {
       history.push('/join')
     }
     return Promise.reject(error)

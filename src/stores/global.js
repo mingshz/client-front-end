@@ -1,5 +1,5 @@
 import { observable, action, useStrict, runInAction } from 'mobx'
-import Axios from 'axios'
+import Axios from '../utils/request'
 import { Toast } from 'antd-mobile'
 
 useStrict(true)
@@ -8,18 +8,6 @@ class Global {
   @observable mobile = ''
   @observable register = false
   @observable authCode = ''
-
-  @action.bound
-  async isExist() {
-    try {
-      const { data } = await Axios.get('/isExist')
-      runInAction(() => {
-        this.mobile = data.data
-      })
-    } catch (err) {
-      Toast.fail('系统异常', 2)
-    }
-  }
 
   @action.bound
   async isRegister(mobile) {
