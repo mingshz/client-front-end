@@ -7,6 +7,7 @@ import { Provider } from 'mobx-react'
 const Items = props => <Async load={import('./pages/items')} componentProps={props} />
 const Deposit = props => <Async load={import('./pages/capital/Deposit')} componentProps={props} />
 const Shop = props => <Async load={import('./pages/store/Shop')} componentProps={props} />
+const Detail = props => <Async load={import('./pages/items/Detail')} componentProps={props}/>
 
 useStrict(true)
 class App extends Component {
@@ -25,7 +26,7 @@ class App extends Component {
             {/* 项目列表 */}
             <Route path="/items" component={Items} />
             {/* 项目详情 */}
-            <Route path="/detail/item/:itemId" component={() => <Async load={import('./pages/items/Detail')} />} />
+            <Route path="/detail/item/:itemId" component={Detail} />
             {/* 支付成功 */}
             <Route path="/success" exact component={() => <Async load={import('./pages/payment/Success')} />} />
             {/* 支付页面 */}
