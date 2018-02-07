@@ -1,0 +1,42 @@
+:local .tabs {
+  display: flex;
+  padding: 0.19rem 0;
+  text-align: center;
+}
+:local .tabItem {
+  position: relative;
+  flex: 1;
+  height: 0.8rem;
+  line-height: 0.8rem;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+  text-align: center;
+}
+:local .tabItem + .tabItem::before {
+  content: ' ';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  bottom: 0;
+  border-left: 1px solid #aaaaaa;
+  color: #383838;
+  transform-origin: 0 0;
+  transform: scaleX(0.5);
+}
+:local .tabItem a {
+  color: #a0a0a0;
+}
+:local .tabItem .active {
+  color: #2f2f2f;
+}
+:local .orderList {
+  padding: 0 0.27rem;
+  background: #fff;
+  height: calc(100vh - 1.17rem);
+}
+.am-list .am-list-body::before {
+  background-color: transparent !important;
+}

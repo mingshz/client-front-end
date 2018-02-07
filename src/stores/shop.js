@@ -68,7 +68,7 @@ class Shop {
         items: toJS(this.orders)
       })
       Toast.hide()
-      history.push('/orders')
+      history.push('/store/orders/all')
       runInAction(() => {
         this.easyOrders = {}
         this.orders = []

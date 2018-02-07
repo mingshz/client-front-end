@@ -98,10 +98,18 @@ mock.onGet(/\/orders$/).reply(
       {
         orderId: '@id',
         completeTime: '@datetime("yyyy-MM-dd H:m")',
-        orderStatus: '已支付',
-        orderStatusCode: 0,
+        orderStatus: '@pick(["success", "forPay"])',
+        orderStatusMsg: function() {
+          if (this.orderStatus === 'success') {
+            return '已完成'
+          }
+          if (this.orderStatus === 'forPay') {
+            return '待付款'
+          }
+        },
         store: '@cword(3)店',
         payer: '@cfirst()先生',
+        payerAvatar: 'http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epm89OQtZt24aicSgu2ccE7Z3HEjML7WbstGUgF0EkGVI0uLeMRqbmBIa8RmaUsGsqpTLN26sTbemw/132',
         payerMobile: /^(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/,
         'items|1-3': [
           {

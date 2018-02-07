@@ -7,7 +7,9 @@ import { Provider } from 'mobx-react'
 const Items = props => <Async load={import('./pages/items')} componentProps={props} />
 const Deposit = props => <Async load={import('./pages/capital/Deposit')} componentProps={props} />
 const Shop = props => <Async load={import('./pages/store/Shop')} componentProps={props} />
-const Detail = props => <Async load={import('./pages/items/Detail')} componentProps={props}/>
+const Detail = props => <Async load={import('./pages/items/Detail')} componentProps={props} />
+
+const StoreOrders = props => <Async load={import('./pages/store/Order')} componentProps={props} />
 
 useStrict(true)
 class App extends Component {
@@ -39,6 +41,8 @@ class App extends Component {
             <Route path="/orders" exact component={() => <Async load={import('./pages/order/OrderList')} />} />
             {/* 商品地址 */}
             <Route path="/shop/:orderId" exact component={Shop} />
+            {/* 销售订单 */}
+            <Route path="/store/orders/:orderType" component={StoreOrders} />
           </Switch>
         </HashRouter>
       </Provider>
