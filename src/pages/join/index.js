@@ -9,7 +9,6 @@ import styles from './Join.css'
 
 @withRouter
 @inject(({ global, status, auth }) => ({
-  isExist: global.isExist,
   sendAuthCode: global.sendAuthCode,
   mobile: global.mobile,
   loading: status.loading,
@@ -27,8 +26,6 @@ class JoinContent extends Component {
   }
 
   componentDidMount() {
-    this.props.isExist()
-
     when(
       () => this.props.isLogin,
       () => {

@@ -4,12 +4,6 @@ import MockAdapter from 'axios-mock-adapter'
 
 var mock = new MockAdapter(axios, { delayResponse: 500 })
 
-mock.onGet(/\/isExist/).reply(200, {
-  resCode: 200,
-  resMsg: 'OK',
-  data: '15670001464'
-})
-
 mock.onGet(/\/isRegister/).reply(
   417,
   Mock.mock({
@@ -41,7 +35,7 @@ mock.onPost(/\/auth/).reply(config => {
 })
 
 mock.onGet(/\/user$/).reply(
-  432,
+  200,
   Mock.mock({
     resCode: 200,
     resMsg: 'OK',

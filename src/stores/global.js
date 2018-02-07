@@ -10,18 +10,6 @@ class Global {
   @observable authCode = ''
 
   @action.bound
-  async isExist() {
-    try {
-      const { data } = await Axios.get('/isExist')
-      runInAction(() => {
-        this.mobile = data.data
-      })
-    } catch (err) {
-      Toast.fail('系统异常', 2)
-    }
-  }
-
-  @action.bound
   async isRegister(mobile) {
     try {
       await Axios.get(`/isRegister/${mobile}`)
