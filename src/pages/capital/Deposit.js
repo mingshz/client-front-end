@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { createForm } from 'rc-form'
 import classNames from 'classnames'
 import { List, Radio, InputItem, Button, WhiteSpace, WingBlank } from 'antd-mobile'
 
@@ -12,7 +13,8 @@ class Deposit extends Component {
   state = {
     value: 0,
     type: 'money',
-    minMoney: sessionStorage.getItem('balance') || 5000
+    minMoney: sessionStorage.getItem('balance') || 5000,
+    redirectUrl: ''
   }
   onChange = value => {
     this.setState({
@@ -31,10 +33,23 @@ class Deposit extends Component {
       .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
     return `此笔充值最少金额为${money}元`
   }
+  redirectUrl = () => {
+    let from = sessionStorage.getItem('from')
+    const { origin } = window.location
+    let url = from === 'undefined' ? `${origin}/#/flow` : `${origin}/#/payment`
+  }
+  submitDeposit = () => {
+    this.props.form.validateFields((error, value) => {
+      if (error) return
+      console.log(value)
+    })
+    this.refs.depositForm.submit()
+  }
   render() {
-    const { value, type } = this.state
+    const { value, redirectUrl } = this.state
+    const { getFieldProps } = this.props.form
     return (
-      <div>
+      <form action="/capital/deposit" method="post" ref="depositForm">
         <List renderHeader={() => '充值方式'}>
           <RadioItem checked={value === 0} onChange={() => this.onChange(0)}>
             微信支付
@@ -45,33 +60,36 @@ class Deposit extends Component {
         </List>
         <List renderHeader={() => this.renderMinMoney()}>
           <InputItem
+            {...getFieldProps('depositSum')}
             className={classNames({
               hidden: value
             })}
-            moneyKeyboardAlign="left"
-            type={type}
+            type="number"
+            name="depositSum"
             placeholder="请输入充值金额"
-            ref={el => (this.customFocusInst = el)}
           >
             金额
           </InputItem>
           <InputItem
+            {...getFieldProps('cdKey')}
             className={classNames({
               hidden: !value
             })}
             type="bankCard"
+            name="cdKey"
             placeholder="请输入充值卡卡密"
           >
             卡密
           </InputItem>
+          <input type="hidden" name="redirectUrl" value={redirectUrl} />
         </List>
         <WhiteSpace size="xl" />
         <WingBlank>
-          <Button>充值</Button>
+          <Button onClick={this.submitDeposit}>充值</Button>
         </WingBlank>
-      </div>
+      </form>
     )
   }
 }
 
-export default Deposit
+export default createForm()(Deposit)

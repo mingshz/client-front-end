@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 import { ListView, Toast } from 'antd-mobile'
-import Axios from 'axios'
+import Axios from '../../utils/request'
 import { inject, observer } from 'mobx-react'
 import styles from './Flow.css'
 import List from '../../components/capital/FlowList'
@@ -31,7 +31,7 @@ class Flow extends Component {
       params: { page: this.state.page, pageSize: 10 }
     })
       .then(res => {
-        let list = res.data.data.list
+        let list = res.list
         if (this.state.page === 1) {
           this.rData = list
         } else {
@@ -50,6 +50,7 @@ class Flow extends Component {
         })
       })
       .catch(err => {
+        console.error(err)
         Toast.fail('系统异常', 2)
       })
   }
@@ -97,11 +98,11 @@ class Flow extends Component {
           <div className={styles.balance}>
             <div className={styles.number}>
               <span>&yen;</span>
-              {user.balance
+              {typeof user.balance === 'number'
                 ? Number(user.balance)
                     .toFixed(2)
                     .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
-                : null}
+                : '****.**'}
             </div>
             <button type="button" onClick={this.goToDeposit}>
               充值

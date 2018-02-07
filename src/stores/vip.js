@@ -2,27 +2,23 @@ import { observable, action, useStrict, runInAction } from 'mobx'
 import Axios from '../utils/request'
 import { Toast } from 'antd-mobile'
 import status from './status'
+import history from '../utils/history'
 
 useStrict(true)
 
 class Auth {
   @observable qrCode = ''
   @observable vipCard = ''
-  @observable orderId = ''
-  @observable pending = true
   @observable order = {}
 
   @action.bound
   async getVipInfo() {
     try {
       status.setLoading(true)
-      const { data, config } = await Axios.get('/user/vipCard')
-      console.log(config.headers)
+      const data = await Axios.get('/user/vipCard')
       runInAction(() => {
-        this.qrCode = data.data.qrCode
-        this.vipCard = data.data.vipCard
-        // this.orderId = config.headers['X-Order-Id']
-        this.orderId = data.data.orderId
+        this.qrCode = data.qrCode
+        this.vipCard = data.vipCard
       })
     } catch (err) {
       Toast.fail('系统异常', 2)
@@ -32,18 +28,16 @@ class Auth {
   }
 
   @action.bound
-  async getOrderInfo(orderId, wait) {
+  async getOrderInfo(orderId, isRefresh) {
     try {
       status.setLoading(true)
-      const { data } = await Axios.get(`/orders/${orderId}`, {
-        params: {
-          wait: wait
-        }
-      })
+      const data = await Axios.get(`/orders/${orderId}`)
       runInAction(() => {
-        if (Object.keys(data.data).length > 0) {
-          this.order = data.data
-          this.pending = false
+        if (Object.keys(data).length > 0) {
+          this.order = data
+          if (!isRefresh) {
+            history.push('/payment')
+          }
         }
       })
     } catch (err) {
@@ -51,11 +45,6 @@ class Auth {
     } finally {
       status.setLoading(false)
     }
-  }
-
-  @action.bound
-  setPending(val) {
-    this.pending = val
   }
 }
 

@@ -2,11 +2,11 @@ import { observable, action, useStrict, runInAction } from 'mobx'
 import Axios from '../utils/request'
 import { Toast } from 'antd-mobile'
 import status from './status'
+import history from '../utils/history'
 
 useStrict(true)
 
 class Payment {
-  @observable isPay = false
   @observable balance = 0
 
   @action.bound
@@ -15,13 +15,13 @@ class Payment {
       status.setLoading(true)
       await Axios.put(`/payment/${orderId}`)
       runInAction(() => {
-        this.isPay = true
+        history.replace('/success')
       })
     } catch (err) {
       console.info(err.response)
-      if (err.response.status === 401) {
+      if (err.response.status === 402) {
         runInAction(() => {
-          this.balance = err.response.data.data.balance
+          this.balance = err.response.data.balance
         })
       } else {
         Toast.fail('系统异常', 2)
@@ -29,11 +29,6 @@ class Payment {
     } finally {
       status.setLoading(false)
     }
-  }
-
-  @action.bound
-  setIsPay(val) {
-    this.isPay = val
   }
 }
 
