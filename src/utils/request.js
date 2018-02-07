@@ -19,6 +19,10 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data
+    // 获取订单ID
+    if (response.headers) {
+      sessionStorage.setItem('OrderId', response.headers['X-Order-Id'])
+    }
     return res
   },
   error => {
@@ -27,6 +31,7 @@ service.interceptors.response.use(
       const { origin, href } = window.location
       window.location.replace(`${origin}/auth?redirectUrl=${encodeURIComponent(href)}`)
     }
+    // 未注册
     if (error.response.status === 433) {
       history.push('/join')
     }

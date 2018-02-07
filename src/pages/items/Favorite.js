@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ListView, Toast } from 'antd-mobile'
-import Axios from 'axios'
+import Axios from '../../utils/request'
 import List from '../../components/list'
 
 class FavoriteItemsPage extends Component {
@@ -22,7 +22,7 @@ class FavoriteItemsPage extends Component {
       params: { itemType: this.state.itemType, page: this.state.page, pageSize: 10 }
     })
       .then(res => {
-        let list = res.data.data.list
+        let list = res.list
         if (this.state.page === 1) {
           this.rData = list
         } else {
@@ -41,6 +41,7 @@ class FavoriteItemsPage extends Component {
         })
       })
       .catch(err => {
+        console.error(err)
         Toast.fail('系统异常', 2)
       })
   }

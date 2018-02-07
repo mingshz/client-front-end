@@ -33,7 +33,7 @@ class Personal extends Component {
         <div className={styles.capital}>
           <span>余额</span>
           <p>
-            {user.balance
+            {typeof user.balance === 'number'
               ? Number(user.balance)
                   .toFixed(2)
                   .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')

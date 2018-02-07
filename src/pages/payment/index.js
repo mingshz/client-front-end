@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import { when, autorun } from 'mobx'
+import { autorun } from 'mobx'
 import { withRouter } from 'react-router'
 import { Modal } from 'antd-mobile'
 import styles from './Payment.css'
@@ -10,26 +10,17 @@ const alert = Modal.alert
 
 @withRouter
 @inject(({ vip, payment }) => ({
-  pending: vip.pending,
   getOrderInfo: vip.getOrderInfo,
   order: vip.order,
-  setPending: vip.setPending,
-  isPay: payment.isPay,
   payOrder: payment.payOrder,
   balance: payment.balance
 }))
 @observer
 class Payment extends Component {
   componentDidMount() {
-    if (this.props.pending) {
+    if (Object.keys(this.props.order).length === 0) {
       this.refresh()
     }
-    when(
-      () => this.props.isPay,
-      () => {
-        this.props.history.replace('/success')
-      }
-    )
     autorun(() => {
       if (this.props.balance !== 0) {
         console.log(this.props.balance)
@@ -55,14 +46,13 @@ class Payment extends Component {
   }
 
   componentWillUnmount() {
-    this.props.setPending(this.props.isPay)
     if (this.props.balance !== 0) this.alertInstance.close()
   }
 
   refresh = () => {
     console.info('Debug: No OrderId && Refresh')
     let orderId = sessionStorage.getItem('OrderId')
-    this.props.getOrderInfo(orderId, -1)
+    this.props.getOrderInfo(orderId, true)
   }
 
   payOrder = () => {

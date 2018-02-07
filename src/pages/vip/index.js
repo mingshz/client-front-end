@@ -8,26 +8,22 @@ import styles from './Vip.css'
 @inject(({ vip }) => ({
   qrCode: vip.qrCode,
   vipCard: vip.vipCard,
-  orderId: vip.orderId,
   getVipInfo: vip.getVipInfo,
-  getOrderInfo: vip.getOrderInfo,
-  pending: vip.pending
+  getOrderInfo: vip.getOrderInfo
 }))
 @observer
 class Vip extends Component {
   componentDidMount() {
     this.props.getVipInfo()
     when(
-      () => this.props.orderId,
+      () => this.props.qrCode,
       () => {
-        this.getOrderHandler(this.props.orderId)
-        sessionStorage.setItem('OrderId', this.props.orderId)
-      }
-    )
-    when(
-      () => !this.props.pending,
-      () => {
-        this.props.history.push('/payment')
+        let orderId = sessionStorage.getItem('OrderId')
+        if (orderId) {
+          this.getOrderHandler(orderId)
+        } else {
+          console.error('订单号丢失')
+        }
       }
     )
   }
@@ -39,8 +35,9 @@ class Vip extends Component {
   getOrderHandler = orderId => {
     let wait = 1
     this.timer = setInterval(() => {
-      console.log(`Now:${wait}`)
-      this.props.getOrderInfo(orderId, wait++)
+      console.log(`Now: ${wait}`)
+      this.props.getOrderInfo(orderId)
+      wait++
     }, 2000)
   }
   render() {

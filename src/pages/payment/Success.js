@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
-import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router'
 import styles from './Payment.css'
 
 @withRouter
-@inject(({ vip, payment }) => ({
-  setIsPay: payment.setIsPay
-}))
-@observer
 class Success extends Component {
   constructor(props) {
     super(props)
@@ -17,7 +12,6 @@ class Success extends Component {
     }
   }
   componentDidMount() {
-    this.props.setIsPay(false)
     this.goOrderList()
   }
 

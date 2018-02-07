@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ListView, Toast } from 'antd-mobile'
 import { inject, observer } from 'mobx-react'
 import { toJS } from 'mobx'
-import Axios from 'axios'
+import Axios from '../../utils/request'
 import Item from '../../components/shop/Item'
 import Cart from '../../components/shop/Cart'
 import styles from './Shop.css'
@@ -35,7 +35,7 @@ class Shop extends Component {
       params: { storeId: this.state.storeId, page: this.state.page, pageSize: 10 }
     })
       .then(res => {
-        let list = res.data.data.list
+        let list = res.data.list
         if (this.state.page === 1) {
           this.rData = list
         } else {
@@ -54,6 +54,7 @@ class Shop extends Component {
         })
       })
       .catch(err => {
+        console.error(err)
         Toast.fail('系统异常', 2)
       })
   }
