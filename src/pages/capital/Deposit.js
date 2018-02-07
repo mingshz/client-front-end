@@ -63,10 +63,11 @@ class Deposit extends Component {
             Toast.fail('请输入正确的金额', 2)
             return
           }
-          if (Number(depositSum) < this.state.minMoney) {
-            Toast.fail(`此笔充值最少金额为${this.state.minMoney}元`, 2)
-            return
-          }
+          // TODO 本地测试先关闭
+          // if (Number(depositSum) < this.state.minMoney) {
+          //   Toast.fail(`此笔充值最少金额为${this.state.minMoney}元`, 2)
+          //   return
+          // }
         }
       }
       this.refs.depositForm.submit()

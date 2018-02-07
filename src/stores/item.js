@@ -11,7 +11,6 @@ class Item {
   async getItemById(itemId) {
     try {
       const data = await Axios.get(`/items/${itemId}`)
-      console.log(data)
       runInAction(() => {
         this.itemDetail = data
       })
