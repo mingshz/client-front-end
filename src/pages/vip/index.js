@@ -4,8 +4,7 @@ import { when } from 'mobx'
 import styles from './Vip.css'
 
 @inject(({ vip }) => ({
-  qrCode: vip.qrCode,
-  vipCard: vip.vipCard,
+  vipInfo: vip.vipInfo,
   getVipInfo: vip.getVipInfo,
   getOrderInfo: vip.getOrderInfo
 }))
@@ -14,9 +13,10 @@ class Vip extends Component {
   componentDidMount() {
     this.props.getVipInfo()
     when(
-      () => this.props.qrCode,
+      () => Object.keys(this.props.vipInfo).length > 0,
       () => {
-        let orderId = sessionStorage.getItem('OrderId')
+        const { orderId } = this.props.vipInfo
+        localStorage.setItem('OrderId', orderId)
         if (orderId) {
           this.getOrderHandler(orderId)
         } else {
@@ -39,12 +39,12 @@ class Vip extends Component {
     }, 2000)
   }
   render() {
-    const { qrCode, vipCard } = this.props
+    const { vipInfo } = this.props
     return (
       <div className="main">
         <div className={styles.qrCode}>
           <div className={styles.hd}>
-            <img src={qrCode ? qrCode : require('../../assets/logo.png')} alt="二维码" />
+            <img src={vipInfo.qrCode ? vipInfo.qrCode : require('../../assets/logo.png')} alt="二维码" />
           </div>
           <div className={styles.bd}>
             <h4>NOTICE</h4>
@@ -58,8 +58,8 @@ class Vip extends Component {
             <p className={styles.name}>锋尚来美会员卡</p>
             <div className={styles.bottom}>
               <p className={styles.number}>
-                {vipCard
-                  ? String(vipCard)
+                {vipInfo.vipCard
+                  ? String(vipInfo.vipCard)
                       .replace(/\D/g, '')
                       .replace(/(....)(?=.)/g, '$1 ')
                   : '**** **** **** ****'}

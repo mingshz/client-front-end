@@ -12,6 +12,7 @@ const alert = Modal.alert
 @inject(({ vip, payment }) => ({
   getOrderInfo: vip.getOrderInfo,
   order: vip.order,
+  vipInfo: vip.vipInfo,
   payOrder: payment.payOrder,
   balance: payment.balance
 }))
@@ -50,12 +51,13 @@ class Payment extends Component {
 
   refresh = () => {
     console.info('Debug: No OrderId && Refresh')
-    let orderId = sessionStorage.getItem('OrderId')
+    let orderId = localStorage.getItem('OrderId')
+    console.info('Warn: OrderId is empty')
     this.props.getOrderInfo(orderId, true)
   }
 
   payOrder = () => {
-    let orderId = sessionStorage.getItem('OrderId')
+    let orderId = localStorage.getItem('OrderId')
     this.props.payOrder(orderId)
   }
   render() {

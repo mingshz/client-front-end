@@ -7,9 +7,8 @@ import history from '../utils/history'
 useStrict(true)
 
 class Auth {
-  @observable qrCode = ''
-  @observable vipCard = ''
   @observable order = {}
+  @observable vipInfo = {}
 
   @action.bound
   async getVipInfo() {
@@ -17,8 +16,7 @@ class Auth {
       status.setLoading(true)
       const data = await Axios.get('/user/vipCard')
       runInAction(() => {
-        this.qrCode = data.qrCode
-        this.vipCard = data.vipCard
+        this.vipInfo = data
       })
     } catch (err) {
       Toast.fail('系统异常', 2)
