@@ -42,6 +42,8 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 // Tools like Cloud9 rely on this.
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
+// 用于自动构建mock程序
+const {hook} = require("@mingshz/local-api-mocker");
 
 // We attempt to use the default port but if it is busy, we offer the user to
 // run on a different port. `detect()` Promise resolves to the next free port.
@@ -65,6 +67,7 @@ choosePort(HOST, DEFAULT_PORT)
       urls.lanUrlForConfig
     );
     const devServer = new WebpackDevServer(compiler, serverConfig);
+    hook(devServer);
     // Launch WebpackDevServer.
     devServer.listen(port, HOST, err => {
       if (err) {

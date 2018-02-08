@@ -7,7 +7,7 @@ import '../node_modules/normalize.css/normalize.css'
 import './assets/font/iconfont.css'
 import 'amfe-flexible'
 import './index.css'
-import './mock'
+// import './mock'
 
 ReactDOM.render(
   <Provider {...store}>
