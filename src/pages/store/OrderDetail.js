@@ -14,7 +14,7 @@ class Detail extends Component {
   }
   render() {
     const { order } = this.props
-    return <Order order={order} hasFooter={false} />
+    return <div>{order.items ? <Order order={order} hasFooter={false} /> : null}</div>
   }
 }
 

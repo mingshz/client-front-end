@@ -187,6 +187,8 @@ mock.onGet(/\/orders\/(.*)/).reply(
   200,
   Mock.mock({
     orderId: '@id',
+    completeTime: '@datetime("yyyy-MM-dd H:m")',
+    orderStatusCode: 0,
     orderStatus: '@pick(["success", "forPay"])',
     orderStatusMsg: function() {
       if (this.orderStatus === 'success') {
@@ -196,13 +198,26 @@ mock.onGet(/\/orders\/(.*)/).reply(
         return '待付款'
       }
     },
+    store: '@cword(3)店',
+    payer: '@cfirst()先生',
+    payerAvatar:
+      'http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epm89OQtZt24aicSgu2ccE7Z3HEjML7WbstGUgF0EkGVI0uLeMRqbmBIa8RmaUsGsqpTLN26sTbemw/132',
+    payerMobile: /^(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/,
     'items|1-5': [
       {
         itemId: '@id',
-        thumbnail:
-          'https://g-search3.alicdn.com/img/bao/uploaded/i4/i1/62871920/TB23sk4cwnH8KJjSspcXXb3QFXa_!!62871920.jpg_230x230.jpg',
-        title: '@ctitle(5,10)',
+        thumbnail: function() {
+          let bgColor = Mock.Random.color()
+          let fontcolor = Mock.Random.hex()
+          let text = Mock.Random.character() + Mock.Random.cword()
+          return Mock.Random.image('120x120', bgColor, fontcolor, text)
+        },
+        title: '全车内饰清洁赠车内空气净化套餐',
         quantity: '@integer(3, 20)',
+        vipPrice: function() {
+          return Number((this.originalPrice - 999).toFixed(2))
+        },
+        originalPrice: '@float(1000, 2000, 2,2)',
         amount: '@float(1000, 2000, 2,2)'
       }
     ]
