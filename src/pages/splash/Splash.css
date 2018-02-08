@@ -1,0 +1,24 @@
+:local .splash {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url('http://image-1252688601.cossh.myqcloud.com/splash.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+:local .skip {
+  position: fixed;
+  top: 15px;
+  right: 10px;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
+  text-align: center;
+}
+
+:local .skip span {
+  color: #deb96b;
+}

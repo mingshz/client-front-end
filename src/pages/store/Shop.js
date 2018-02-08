@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
 import { ListView, Toast } from 'antd-mobile'
 import { inject, observer } from 'mobx-react'
-import { toJS } from 'mobx'
+import { toJS, when } from 'mobx'
 import Axios from '../../utils/request'
 import Item from '../../components/shop/Item'
 import Cart from '../../components/shop/Cart'
 import styles from './Shop.css'
 
-@inject(({ shop }) => ({
+@inject(({ shop, personal }) => ({
   addItem: shop.addItem,
   minusItem: shop.minusItem,
   easyOrders: shop.easyOrders,
   total: shop.total,
-  submitOrders: shop.submitOrders
+  submitOrders: shop.submitOrders,
+  getUserInfo: personal.getUserInfo,
+  user: personal.user
 }))
 @observer
 class Shop extends Component {
@@ -25,14 +27,15 @@ class Shop extends Component {
     this.state = {
       dataSource,
       isLoading: true,
-      storeId: this.props.match.params.orderId,
+      storeId: '',
       page: 1
     }
   }
 
-  getItems = () => {
+  getItems = storeId => {
+    storeId = storeId || this.state.storeId
     Axios.get('/items', {
-      params: { storeId: this.state.storeId, page: this.state.page, pageSize: 10 }
+      params: { storeId: storeId, page: this.state.page, pageSize: 10 }
     })
       .then(res => {
         let list = res.list
@@ -60,7 +63,17 @@ class Shop extends Component {
   }
 
   componentDidMount() {
-    this.getItems()
+    this.props.getUserInfo()
+    when(
+      () => Object.keys(this.props.user).length > 0,
+      () => {
+        const { storeId } = this.props.user
+        this.setState({
+          storeId: storeId
+        })
+        this.getItems(storeId)
+      }
+    )
   }
 
   onEndReached = event => {

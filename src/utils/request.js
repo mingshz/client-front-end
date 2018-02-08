@@ -19,14 +19,10 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data
-    // 获取订单ID
-    if (response.headers) {
-      sessionStorage.setItem('OrderId', response.headers['X-Order-Id'])
-    }
     return res
   },
   error => {
-    console.log(error)
+    console.log(error.response.status)
     // 微信未授权
     if (error.response.status === 431) {
       const { origin, href } = window.location
@@ -37,6 +33,9 @@ service.interceptors.response.use(
     if (error.response.status === 433) {
       history.push('/join')
       return
+    }
+    if (error.response.status === 500) {
+      history.push(`/error/${error.response.status}`)
     }
     return Promise.reject(error)
   }
