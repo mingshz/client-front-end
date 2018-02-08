@@ -8,8 +8,8 @@ const Items = props => <Async load={import('./pages/items')} componentProps={pro
 const Deposit = props => <Async load={import('./pages/capital/Deposit')} componentProps={props} />
 const Shop = props => <Async load={import('./pages/store/Shop')} componentProps={props} />
 const Detail = props => <Async load={import('./pages/items/Detail')} componentProps={props} />
-
 const StoreOrders = props => <Async load={import('./pages/store/Order')} componentProps={props} />
+const StoreOrderDetail = props => <Async load={import('./pages/store/OrderDetail')} componentProps={props} />
 
 useStrict(true)
 class App extends Component {
@@ -43,6 +43,8 @@ class App extends Component {
             <Route path="/shop/:orderId" exact component={Shop} />
             {/* 销售订单 */}
             <Route path="/store/orders/:orderType" component={StoreOrders} />
+            {/* 销售订单详情 */}
+            <Route path="/detail/order/:orderId" component={StoreOrderDetail} />
           </Switch>
         </HashRouter>
       </Provider>

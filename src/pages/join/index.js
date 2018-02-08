@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import { createForm } from 'rc-form'
 import classNames from 'classnames'
 import { inject, observer } from 'mobx-react'
-import { withRouter } from 'react-router'
 import { Icon } from 'antd-mobile'
 import styles from './Join.css'
 
-@withRouter
 @inject(({ global, status, auth }) => ({
   sendAuthCode: global.sendAuthCode,
   mobile: global.mobile,

@@ -10,7 +10,7 @@ const Order = props => {
           <span className={styles.name}>
             <i className="iconfont icon-store" />门店：{order.store}
           </span>
-          <span className={styles.state}>{order.orderStatus}</span>
+          <span className={styles.state}>{order.orderStatusMsg}</span>
         </div>
         <div className={styles.orderInfo}>
           <span>订单号：{order.orderId}</span>
