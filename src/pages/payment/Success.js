@@ -18,6 +18,7 @@ class Success extends Component {
   componentWillUnmount() {
     clearInterval(this.timer)
   }
+  
   goOrderList = () => {
     this.timer = setInterval(() => {
       this.setState({
