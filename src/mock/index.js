@@ -15,9 +15,9 @@ mock.onGet(/\/isRegister/).reply(
 
 mock.onGet(/\/sendAuthCode/).reply(200, {})
 
-mock.onPost(/\/auth/).reply(200, {})
+mock.onPost(/\/auth/).reply(401, {})
 
-mock.onGet(/\/user$/).reply(200, {
+mock.onGet(/\/user$/).reply(431, {
   balance: 0,
   wxNickName: 'Neo Chang',
   mobile: '15670007176',
@@ -109,7 +109,8 @@ mock.onGet(/\/orders$/).reply(
         },
         store: '@cword(3)店',
         payer: '@cfirst()先生',
-        payerAvatar: 'http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epm89OQtZt24aicSgu2ccE7Z3HEjML7WbstGUgF0EkGVI0uLeMRqbmBIa8RmaUsGsqpTLN26sTbemw/132',
+        payerAvatar:
+          'http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epm89OQtZt24aicSgu2ccE7Z3HEjML7WbstGUgF0EkGVI0uLeMRqbmBIa8RmaUsGsqpTLN26sTbemw/132',
         payerMobile: /^(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/,
         'items|1-3': [
           {

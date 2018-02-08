@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import { withRouter } from 'react-router'
 import { when } from 'mobx'
 import styles from './Vip.css'
 
-@withRouter
 @inject(({ vip }) => ({
   qrCode: vip.qrCode,
   vipCard: vip.vipCard,
