@@ -4,8 +4,9 @@ import Vip from '../stores/vip'
 describe('会员中心页面测试', () => {
   it('修改登录状态', async () => {
     await Vip.getVipInfo()
-    expect(Vip.qrCode).toBeDefined()
-    expect(Vip.vipCard).toBeDefined()
+    expect(Vip.vipInfo).toHaveProperty('qrCode')
+    expect(Vip.vipInfo).toHaveProperty('orderId')
+    expect(Vip.vipInfo).toHaveProperty('vipCard')
   })
 
   it('获取订单详情', async () => {

@@ -17,7 +17,7 @@ mock.onGet(/\/sendAuthCode/).reply(200, {})
 
 mock.onPost(/\/auth/).reply(401, {})
 
-mock.onGet(/\/user$/).reply(431, {
+mock.onGet(/\/user$/).reply(400, {
   balance: 0,
   wxNickName: 'Neo Chang',
   mobile: '15670007176',
@@ -25,12 +25,13 @@ mock.onGet(/\/user$/).reply(431, {
   id: 5,
   avatar:
     'http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epm89OQtZt24aicSgu2ccE7Z3HEjML7WbstGUgF0EkGVI0uLeMRqbmBIa8RmaUsGsqpTLN26sTbemw/132',
-  storeId: '',
+  storeId: '123',
   guidable: false,
   enabled: true
 })
 
 mock.onGet(/\/items$/).reply(config => {
+  console.log(config)
   if (config.params.itemType === 'HOT') {
     return [
       200,

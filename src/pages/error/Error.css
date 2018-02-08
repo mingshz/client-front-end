@@ -1,0 +1,24 @@
+:local .body {
+  height: 100vh;
+  background: #fff;
+}
+
+:local .result {
+  padding: 30vw 6.666667vw 0;
+  text-align: center;
+}
+:local .result i {
+  font-size: 120px;
+}
+.error-code {
+  color: #f13642;
+}
+.warn-code {
+  color: #ffc600;
+}
+:local .tips {
+  margin-top: 10px;
+  line-height: 20px;
+  color: #666;
+  font-size: 12px;
+}
