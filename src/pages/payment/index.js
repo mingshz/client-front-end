@@ -23,7 +23,6 @@ class Payment extends Component {
     }
     autorun(() => {
       if (this.props.balance !== 0) {
-        console.log(this.props.balance)
         sessionStorage.setItem('balance', this.props.balance)
         this.alertInstance = alert('充值', '您的余额不足，是否充值？', [
           {

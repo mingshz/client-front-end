@@ -44,7 +44,7 @@ class App extends Component {
             {/* 销售订单 */}
             <Route path="/store/orders/:orderType" component={StoreOrders} />
             {/* 销售订单详情 */}
-            <Route path="/detail/item/:orderId" component={StoreOrderDetail} />
+            <Route path="/detail/order/:orderId" component={StoreOrderDetail} />
           </Switch>
         </HashRouter>
       </Provider>

@@ -1,6 +1,7 @@
 import { observable, action, useStrict, toJS, extendObservable, runInAction } from 'mobx'
 import Axios from '../utils/request'
 import { Toast } from 'antd-mobile'
+import status from './status'
 import history from '../utils/history'
 
 useStrict(true)
@@ -9,6 +10,7 @@ class Shop {
   @observable easyOrders = {}
   @observable orders = []
   @observable total = 0
+  @observable order = {}
 
   @action.bound
   minusItem(data) {
@@ -77,6 +79,23 @@ class Shop {
     } catch (err) {
       console.log(err)
       Toast.fail('系统异常', 2)
+    }
+  }
+
+  @action.bound
+  async getOrderById(orderId) {
+    try {
+      status.setLoading(true)
+      const data = await Axios.get(`/orders/${orderId}`)
+      runInAction(() => {
+        if (Object.keys(data).length > 0) {
+          this.order = data
+        }
+      })
+    } catch (err) {
+      Toast.fail('系统异常', 2)
+    } finally {
+      status.setLoading(false)
     }
   }
 }

@@ -7,7 +7,7 @@ const Order = props => {
   let money = 0
   order.items.map(o => (money += o.vipPrice * 100))
   return (
-    <Link to={`/orders/${order.orderId}`} className={styles.order}>
+    <Link to={`/detail/order/${order.orderId}`} className={styles.order}>
       <div className={styles.hd}>
         <img src={order.payerAvatar} alt={order.payer} />
       </div>

@@ -35,7 +35,7 @@ class Shop extends Component {
       params: { storeId: this.state.storeId, page: this.state.page, pageSize: 10 }
     })
       .then(res => {
-        let list = res.data.list
+        let list = res.list
         if (this.state.page === 1) {
           this.rData = list
         } else {
