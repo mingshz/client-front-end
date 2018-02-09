@@ -1,6 +1,10 @@
 import axios from 'axios'
+import { Toast } from 'antd-mobile'
+
 import history from './history'
 
+const errorCode = [403, 500]
+const noMsg = [403, 500, 431, 432]
 const service = axios.create({
   // baseURL: '',
   timeout: 10000
@@ -27,15 +31,17 @@ service.interceptors.response.use(
     if (error.response.status === 431) {
       const { origin, href } = window.location
       window.location.replace(`${origin}/auth?redirectUrl=${encodeURIComponent(href)}`)
-      return
     }
     // 未注册
-    if (error.response.status === 433) {
+    if (error.response.status === 432) {
       history.push('/join')
-      return
     }
-    if (error.response.status === 500) {
+    if (errorCode.indexOf(error.response.status) !== -1) {
       history.push(`/error/${error.response.status}`)
+    }
+    if (noMsg.indexOf(error.response.status) === -1) {
+      console.log(error.response)
+      Toast.fail('系统异常', 2)
     }
     return Promise.reject(error)
   }

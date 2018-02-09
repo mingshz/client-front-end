@@ -1,5 +1,5 @@
 import { action, useStrict } from 'mobx'
-import { Toast } from 'antd-mobile'
+// import { Toast } from 'antd-mobile'
 import status from './status'
 import Axios from '../utils/request'
 import history from '../utils/history'
@@ -14,7 +14,7 @@ class Auth {
       await Axios.post('/auth', userInfo)
       history.push('/personal')
     } catch (err) {
-      Toast.fail('系统异常', 2)
+      console.log(err.response.status)
     } finally {
       status.setLoading(false)
     }

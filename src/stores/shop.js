@@ -78,7 +78,6 @@ class Shop {
       })
     } catch (err) {
       console.log(err)
-      Toast.fail('系统异常', 2)
     }
   }
 
@@ -93,7 +92,7 @@ class Shop {
         }
       })
     } catch (err) {
-      Toast.fail('系统异常', 2)
+      console.log(err.response.status)
     } finally {
       status.setLoading(false)
     }
