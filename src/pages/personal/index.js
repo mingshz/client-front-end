@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { inject, observer } from 'mobx-react'
+import Loading from '../../components/loading'
 import styles from './Personal.css'
 
-@inject(({ personal }) => ({
+@inject(({ status, personal }) => ({
+  loading: status.loading,
   user: personal.user,
   getUserInfo: personal.getUserInfo
 }))
@@ -14,7 +16,8 @@ class Personal extends Component {
   }
 
   render() {
-    const { user } = this.props
+    const { user, loading } = this.props
+    if (loading) return <Loading />
     return (
       <div className="main">
         <div className={styles.header}>

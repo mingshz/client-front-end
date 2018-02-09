@@ -5,16 +5,18 @@ import { toJS, when } from 'mobx'
 import Axios from '../../utils/request'
 import Item from '../../components/shop/Item'
 import Cart from '../../components/shop/Cart'
+import Loading from '../../components/loading'
 import styles from './Shop.css'
 
-@inject(({ shop, personal }) => ({
+@inject(({ shop, personal, status }) => ({
   addItem: shop.addItem,
   minusItem: shop.minusItem,
   easyOrders: shop.easyOrders,
   total: shop.total,
   submitOrders: shop.submitOrders,
   getUserInfo: personal.getUserInfo,
-  user: personal.user
+  user: personal.user,
+  loading: status.loading
 }))
 @observer
 class Shop extends Component {
@@ -83,13 +85,14 @@ class Shop extends Component {
   }
 
   render() {
-    const { addItem, minusItem, total, easyOrders, submitOrders, match } = this.props
+    const { addItem, minusItem, total, easyOrders, submitOrders, match, loading } = this.props
     const orderId = match.params.orderId
     const orders = toJS(easyOrders)
     const row = (rowData, sectionID, rowID) => {
       return <Item data={rowData} addItem={addItem} minusItem={minusItem} />
     }
 
+    if (loading) return <Loading />
     return (
       <div>
         <div className={styles.itemList}>

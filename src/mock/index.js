@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 import axios from '../utils/request'
 import MockAdapter from 'axios-mock-adapter'
 
-var mock = new MockAdapter(axios, { delayResponse: 500 })
+var mock = new MockAdapter(axios, { delayResponse: 5000 })
 
 mock.onGet(/\/isRegister/).reply(
   200,
@@ -17,7 +17,7 @@ mock.onGet(/\/sendAuthCode/).reply(200, {})
 
 mock.onPost(/\/auth/).reply(401, {})
 
-mock.onGet(/\/user$/).reply(400, {
+mock.onGet(/\/user$/).reply(432, {
   balance: 0,
   wxNickName: 'Neo Chang',
   mobile: '15670007176',

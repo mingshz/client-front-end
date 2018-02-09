@@ -1,6 +1,6 @@
 import { observable, action, useStrict, runInAction } from 'mobx'
 import Axios from '../utils/request'
-import { Toast } from 'antd-mobile'
+// import { Toast } from 'antd-mobile'
 import status from './status'
 import history from '../utils/history'
 
@@ -24,7 +24,7 @@ class Payment {
           this.balance = err.response.data.balance
         })
       } else {
-        Toast.fail('系统异常', 2)
+        console.log(err.response.status)
       }
     } finally {
       status.setLoading(false)
