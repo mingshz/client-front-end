@@ -105,7 +105,7 @@ class Deposit extends Component {
               hidden: !value
             })}
             disabled={!value}
-            type="bankCard"
+            type="text"
             name="cdKey"
             placeholder="请输入充值卡卡密"
           >
