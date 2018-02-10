@@ -11,6 +11,7 @@ const Detail = props => <Async load={import('./pages/items/Detail')} componentPr
 const StoreOrders = props => <Async load={import('./pages/store/Order')} componentProps={props} />
 const StoreOrderDetail = props => <Async load={import('./pages/store/OrderDetail')} componentProps={props} />
 const Error = props => <Async load={import('./pages/error')} componentProps={props} />
+const Result = props => <Async load={import('./pages/result/Error')} componentProps={props} />
 
 useStrict(true)
 class App extends Component {
@@ -49,6 +50,8 @@ class App extends Component {
             <Route path="/detail/order/:orderId" component={StoreOrderDetail} />
             {/* 错误页面 */}
             <Route path="/error/:code" component={Error} />
+            {/* 结果页面 */}
+            <Route path="/result" exact component={Result} />
             <Route component={Error} />
           </Switch>
         </HashRouter>
