@@ -22,7 +22,7 @@ class Global {
           this.register = true
         })
       } else {
-        Toast.fail('系统异常', 2)
+        // Toast.fail('系统异常', 2)
       }
     }
   }
@@ -33,7 +33,17 @@ class Global {
       Toast.success('发送成功', 1)
       await Axios.get(`/sendAuthCode/${mobile}`)
     } catch (err) {
-      Toast.fail('系统异常', 2)
+      // Toast.fail('系统异常', 2)
+    }
+  }
+
+  @action.bound
+  async sysInit(mobile) {
+    try {
+      const data = await Axios.get('/init')
+      console.log(data);
+    } catch (err) {
+      // Toast.fail('系统异常', 2)
     }
   }
 }
