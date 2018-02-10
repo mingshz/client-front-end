@@ -22,25 +22,25 @@ class Flow extends Component {
     this.state = {
       dataSource,
       isLoading: true,
-      page: 1
+      current: 1
     }
   }
 
   getFlow = () => {
     Axios.get('/capital/flow', {
-      params: { page: this.state.page, pageSize: 10 }
+      params: { current: this.state.current, pageSize: 10 }
     })
       .then(res => {
         let list = res.list
-        if (this.state.page === 1) {
+        if (this.state.current === 1) {
           this.rData = list
         } else {
           this.rData = this.rData.concat(list)
         }
         if (list.length === 10) {
-          let page = this.state.page
+          let current = this.state.current
           this.setState({
-            page: ++page
+            current: ++current
           })
         }
 

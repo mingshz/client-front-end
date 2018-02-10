@@ -16,7 +16,7 @@ class OrderList extends Component {
       isLoading: true,
       orderType: 'STORE',
       orderStatus: statue,
-      page: 1
+      current: 1
     }
   }
 
@@ -30,21 +30,21 @@ class OrderList extends Component {
       params: {
         orderType: this.state.orderType,
         orderStatus: this.state.orderStatus,
-        page: this.state.page,
+        current: this.state.current,
         pageSize: 10
       }
     })
       .then(res => {
         let list = res.list
-        if (this.state.page === 1) {
+        if (this.state.current === 1) {
           this.rData = list
         } else {
           this.rData = this.rData.concat(list)
         }
         if (list.length === 10) {
-          let page = this.state.page
+          let current = this.state.current
           this.setState({
-            page: ++page
+            current: ++current
           })
         }
 

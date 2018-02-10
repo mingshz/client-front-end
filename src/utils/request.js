@@ -4,7 +4,7 @@ import { Toast } from 'antd-mobile'
 import history from './history'
 
 const errorCode = [403, 500]
-const noMsg = [403, 500, 431, 432]
+const noMsg = [402, 403, 431, 432, 500]
 const service = axios.create({
   // baseURL: '',
   timeout: 10000
