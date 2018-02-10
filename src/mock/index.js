@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 import axios from '../utils/request'
 import MockAdapter from 'axios-mock-adapter'
 
-var mock = new MockAdapter(axios, { delayResponse: 5000 })
+var mock = new MockAdapter(axios, { delayResponse: 500 })
 
 mock.onGet(/\/isRegister/).reply(
   200,
@@ -226,7 +226,7 @@ mock.onGet(/\/orders\/(.*)/).reply(
 )
 
 mock.onPut(/\/payment\/(.*)/).reply(config => {
-  if (Math.random() > 0.1) {
+  if (Math.random() > 0.9) {
     return [200, {}]
   } else {
     return [
