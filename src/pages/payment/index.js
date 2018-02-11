@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import qs from 'query-string'
 import { autorun } from 'mobx'
 import { withRouter } from 'react-router'
 import { Modal } from 'antd-mobile'
@@ -19,8 +20,12 @@ const alert = Modal.alert
 @observer
 class Payment extends Component {
   componentDidMount() {
+    const params = qs.parse(this.props.location.search)
     if (Object.keys(this.props.order).length === 0) {
       this.refresh()
+    }
+    if (params.paySuccess === 'true') {
+      sessionStorage.removeItem('balance')
     }
     autorun(() => {
       if (this.props.balance !== 0) {
