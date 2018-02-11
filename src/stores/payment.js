@@ -13,7 +13,7 @@ class Payment {
   async payOrder(orderId) {
     try {
       status.setLoading(true)
-      await Axios.put(`/payment/${orderId}`)
+      await Axios.put(`/capital/payment/${orderId}`)
       runInAction(() => {
         history.replace('/success')
       })
