@@ -58,11 +58,7 @@ class Vip extends Component {
             <p className={styles.name}>锋尚来美会员卡</p>
             <div className={styles.bottom}>
               <p className={styles.number}>
-                {vipInfo.vipCard
-                  ? String(vipInfo.vipCard)
-                      .replace(/\D/g, '')
-                      .replace(/(....)(?=.)/g, '$1 ')
-                  : '**** **** **** ****'}
+                {vipInfo.vipCard ? String(vipInfo.vipCard).replace(/(....)(?=.)/g, '$1 ') : '**** **** **** ****'}
               </p>
               <span>授予尊敬的锋尚来美VIP会员</span>
             </div>

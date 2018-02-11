@@ -34,10 +34,7 @@ class Payment extends Component {
           {
             text: '确定',
             onPress: () => {
-              this.props.history.push({
-                pathname: '/deposit',
-                state: 'payment'
-              })
+              this.props.history.push('/deposit/payment')
             }
           }
         ])

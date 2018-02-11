@@ -31,7 +31,7 @@ class Auth {
       status.setLoading(true)
       const data = await Axios.get(`/orders/${orderId}`)
       runInAction(() => {
-        if (Object.keys(data).length > 0) {
+        if (data.orderStatusCode !== 0) {
           this.order = data
           if (!isRefresh) {
             history.push('/payment')
