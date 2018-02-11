@@ -21,7 +21,7 @@ class Payment {
       console.info(err.response)
       if (err.response.status === 402) {
         runInAction(() => {
-          this.balance = err.response.data.balance
+          this.balance = err.response.data
         })
       } else {
         console.log(err.response.status)
