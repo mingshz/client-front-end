@@ -7,7 +7,6 @@ useStrict(true)
 class Global {
   @observable mobile = ''
   @observable register = false
-  @observable authCode = ''
 
   @action.bound
   async isRegister(mobile) {
@@ -27,7 +26,6 @@ class Global {
     }
   }
 
-  @action.bound
   async sendAuthCode(mobile) {
     try {
       Toast.success('发送成功', 1)
@@ -37,10 +35,12 @@ class Global {
     }
   }
 
-  async sysInit(mobile) {
+  async sysInit() {
     try {
       const data = await Axios.get('/init')
-      console.log(data);
+      for (let init in data) {
+        localStorage.setItem(init, data[init])
+      }
     } catch (err) {
       // Toast.fail('系统异常', 2)
     }
