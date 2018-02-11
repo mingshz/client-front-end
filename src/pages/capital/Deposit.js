@@ -5,20 +5,28 @@ import { Toast } from 'antd-mobile'
 import { List, Radio, InputItem, Button, WhiteSpace, WingBlank } from 'antd-mobile'
 
 const RadioItem = Radio.RadioItem
-
+const { origin } = window.location
 class Deposit extends Component {
-  componentWillMount() {
-    sessionStorage.setItem('from', this.props.location.state)
-  }
-  componentDidMount() {
-    this.redirectUrl()
-  }
   state = {
     value: 0,
     type: 'money',
-    minMoney: sessionStorage.getItem('balance') || 5000,
-    redirectUrl: ''
+    minMoney: localStorage.getItem('minRechargeAmount'),
+    redirectUrl: `${origin}/#/flow?paySuccess=true`
   }
+  componentWillMount() {
+    sessionStorage.setItem('from', this.props.match.params.from)
+    if (this.props.match.params.from === 'payment') {
+      let money =
+        sessionStorage.getItem('balance') > localStorage.getItem('minRechargeAmount')
+          ? sessionStorage.getItem('balance')
+          : localStorage.getItem('minRechargeAmount')
+      this.setState({
+        minMoney: money,
+        redirectUrl: `${origin}/#/payment?paySuccess=true`
+      })
+    }
+  }
+
   onChange = value => {
     this.setState({
       value,
@@ -27,20 +35,12 @@ class Deposit extends Component {
   }
 
   renderMinMoney = () => {
-    let from = sessionStorage.getItem('from')
-    let money = from === 'undefined' ? 5000 : this.state.minMoney > 5000 ? this.state.minMoney : 5000
+    let money = this.state.minMoney
+
     money = Number(money)
       .toFixed(2)
       .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
     return `此笔充值最少金额为${money}元`
-  }
-  redirectUrl = () => {
-    let from = sessionStorage.getItem('from')
-    const { origin } = window.location
-    let url = from === 'undefined' ? `${origin}/#/flow` : `${origin}/#/payment`
-    this.setState({
-      redirectUrl: url
-    })
   }
 
   submitDeposit = () => {
@@ -63,11 +63,10 @@ class Deposit extends Component {
             Toast.fail('请输入正确的金额', 2)
             return
           }
-          // TODO 本地测试先关闭
-          // if (Number(depositSum) < this.state.minMoney) {
-          //   Toast.fail(`此笔充值最少金额为${this.state.minMoney}元`, 2)
-          //   return
-          // }
+          if (Number(depositSum) < this.state.minMoney) {
+            Toast.fail(`此笔充值最少金额为${this.state.minMoney}元`, 2)
+            return
+          }
         }
       }
       this.refs.depositForm.submit()
@@ -75,6 +74,7 @@ class Deposit extends Component {
   }
   render() {
     const { value, redirectUrl } = this.state
+
     const { getFieldProps } = this.props.form
     return (
       <form action="/capital/deposit" method="post" ref="depositForm" autoComplete="off">
