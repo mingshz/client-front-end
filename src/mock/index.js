@@ -222,15 +222,10 @@ mock.onGet(/\/orders\/(.*)/).reply(config => {
 })
 
 mock.onPut(/\/payment\/(.*)/).reply(config => {
-  if (Math.random() > 0.9) {
+  if (Math.random() > 2) {
     return [200, {}]
   } else {
-    return [
-      402,
-      Mock.mock({
-        balance: '@float(100, 20000, 2,2)'
-      })
-    ]
+    return [402, 4980]
   }
 })
 

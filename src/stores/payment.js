@@ -8,6 +8,7 @@ useStrict(true)
 
 class Payment {
   @observable balance = 0
+  @observable timestamp = ''
 
   @action.bound
   async payOrder(orderId) {
@@ -22,6 +23,7 @@ class Payment {
       if (err.response.status === 402) {
         runInAction(() => {
           this.balance = err.response.data
+          this.timestamp = +new Date()
         })
       } else {
         console.log(err.response.status)

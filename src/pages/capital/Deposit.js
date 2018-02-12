@@ -17,10 +17,10 @@ class Deposit extends Component {
     sessionStorage.setItem('from', this.props.match.params.from)
     if (this.props.match.params.from === 'payment') {
       // balance 是还差多少钱
-      const balance = sessionStorage.getItem('balance');
-      const min = localStorage.getItem('minRechargeAmount')||0;
-      const money = Math.max(min,balance);
-      console.log('需支付:',balance, ';最小充值:',min,';应充值:',money);
+      const balance = sessionStorage.getItem('balance') || 0
+      const min = localStorage.getItem('minRechargeAmount') || 0
+      const money = Math.max(min, balance)
+      console.log('需支付:', balance, ';最小充值:', min, ';应充值:', money)
       this.setState({
         minMoney: money,
         redirectUrl: `${origin}/#/payment?paySuccess=true`
