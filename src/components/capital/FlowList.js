@@ -5,7 +5,12 @@ import styles from './FLowList.css'
 const List = props => {
   const { data } = props
   return (
-    <div className={styles.list}>
+    <a
+      className={classNames(styles.list, {
+        [styles.link]: !data.type
+      })}
+      href={data.type ? 'javascript:;' : `#/detail/order/${data.orderId}`}
+    >
       <p className={styles.time}>{data.time}</p>
       <div
         className={classNames(styles.info, {
@@ -14,12 +19,13 @@ const List = props => {
       >
         <span className={styles.name}>{data.title}</span>
         <span className={styles.number}>
-          ¥{Number(data.sum)
+          {data.type ? '+' : '-'}
+          {Number(data.sum)
             .toFixed(2)
             .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}
         </span>
       </div>
-    </div>
+    </a>
   )
 }
 

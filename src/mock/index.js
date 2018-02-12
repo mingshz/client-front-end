@@ -10,7 +10,7 @@ mock.onGet(/\/sendAuthCode/).reply(200, {})
 
 mock.onPost(/\/auth/).reply(200, {})
 
-mock.onGet(/\/user$/).reply(432, {
+mock.onGet(/\/user$/).reply(200, {
   balance: 0,
   wxNickName: 'Neo Chang',
   mobile: '15670007176',
