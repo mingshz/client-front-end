@@ -10,7 +10,7 @@ mock.onGet(/\/sendAuthCode/).reply(200, {})
 
 mock.onPost(/\/auth/).reply(200, {})
 
-mock.onGet(/\/user$/).reply(432, {
+mock.onGet(/\/user$/).reply(200, {
   balance: 0,
   wxNickName: 'Neo Chang',
   mobile: '15670007176',
@@ -222,15 +222,10 @@ mock.onGet(/\/orders\/(.*)/).reply(config => {
 })
 
 mock.onPut(/\/payment\/(.*)/).reply(config => {
-  if (Math.random() > 0.9) {
+  if (Math.random() > 2) {
     return [200, {}]
   } else {
-    return [
-      402,
-      Mock.mock({
-        balance: '@float(100, 20000, 2,2)'
-      })
-    ]
+    return [402, 4980]
   }
 })
 

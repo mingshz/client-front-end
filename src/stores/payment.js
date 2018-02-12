@@ -8,12 +8,13 @@ useStrict(true)
 
 class Payment {
   @observable balance = 0
+  @observable timestamp = ''
 
   @action.bound
   async payOrder(orderId) {
     try {
       status.setLoading(true)
-      await Axios.put(`/payment/${orderId}`)
+      await Axios.put(`/capital/payment/${orderId}`)
       runInAction(() => {
         history.replace('/success')
       })
@@ -21,7 +22,8 @@ class Payment {
       console.info(err.response)
       if (err.response.status === 402) {
         runInAction(() => {
-          this.balance = err.response.data.balance
+          this.balance = err.response.data
+          this.timestamp = +new Date()
         })
       } else {
         console.log(err.response.status)

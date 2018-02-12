@@ -15,7 +15,8 @@ const alert = Modal.alert
   order: vip.order,
   vipInfo: vip.vipInfo,
   payOrder: payment.payOrder,
-  balance: payment.balance
+  balance: payment.balance,
+  timestamp: payment.timestamp
 }))
 @observer
 class Payment extends Component {
@@ -28,7 +29,7 @@ class Payment extends Component {
       sessionStorage.removeItem('balance')
     }
     autorun(() => {
-      if (this.props.balance !== 0) {
+      if (this.props.timestamp) {
         sessionStorage.setItem('balance', this.props.balance)
         this.alertInstance = alert('充值', '您的余额不足，是否充值？', [
           {
