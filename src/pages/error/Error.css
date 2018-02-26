@@ -16,6 +16,10 @@
 .warn-code {
   color: #ffc600;
 }
+
+:local .title {
+  font-size: 24px;
+}
 :local .tips {
   margin-top: 10px;
   line-height: 20px;
