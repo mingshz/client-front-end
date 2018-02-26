@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { ListView, Toast } from 'antd-mobile'
 import { inject, observer } from 'mobx-react'
 import { toJS, when } from 'mobx'
+import { withRouter } from 'react-router'
 import Axios from '../../utils/request'
 import Item from '../../components/shop/Item'
 import Cart from '../../components/shop/Cart'
 import Loading from '../../components/loading'
 import styles from './Shop.css'
 
+@withRouter
 @inject(({ shop, personal, status }) => ({
   addItem: shop.addItem,
   minusItem: shop.minusItem,
@@ -70,6 +72,10 @@ class Shop extends Component {
       () => Object.keys(this.props.user).length > 0,
       () => {
         const { storeId } = this.props.user
+        if (!storeId) {
+          this.props.history.push('/error/404')
+          return
+        }
         this.setState({
           storeId: storeId
         })

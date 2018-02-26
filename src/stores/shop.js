@@ -78,6 +78,7 @@ class Shop {
       })
     } catch (err) {
       console.log(err)
+      Toast.hide()
     }
   }
 

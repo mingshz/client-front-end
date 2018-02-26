@@ -18,7 +18,7 @@ mock.onGet(/\/user$/).reply(200, {
   id: 5,
   avatar:
     'http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epm89OQtZt24aicSgu2ccE7Z3HEjML7WbstGUgF0EkGVI0uLeMRqbmBIa8RmaUsGsqpTLN26sTbemw/132',
-  storeId: '123',
+  storeId: '',
   guidable: false,
   enabled: true
 })
