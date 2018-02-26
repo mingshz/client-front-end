@@ -177,7 +177,7 @@ mock.onGet(/\/orders\/(.*)/).reply(config => {
       orderId: '@id',
       completeTime: '@datetime("yyyy-MM-dd H:m")',
       orderStatusCode: function() {
-        if (time > 5) {
+        if (time > 500) {
           console.log(time)
           time = 0
           return 1

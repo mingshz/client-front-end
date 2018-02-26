@@ -40,12 +40,14 @@ class Vip extends Component {
   }
   render() {
     const { vipInfo } = this.props
+
+    const vipImg = {
+      backgroundImage: `url(${vipInfo.qrCode ? vipInfo.qrCode : require('../../assets/logo.png')})`
+    }
     return (
       <div className="main">
         <div className={styles.qrCode}>
-          <div className={styles.hd}>
-            <img src={vipInfo.qrCode ? vipInfo.qrCode : require('../../assets/logo.png')} alt="二维码" />
-          </div>
+          <div className={styles.hd} style={vipImg} />
           <div className={styles.bd}>
             <h4>NOTICE</h4>
             <p>向商户出示该会员卡，可打折消费</p>
