@@ -21,9 +21,9 @@ class OrderList extends Component {
   }
 
   getOrderStatus = () => {
-    if (this.props.location.pathname === '/store/orders/all') return 'all'
-    if (this.props.location.pathname === '/store/orders/complete') return 'complete'
-    if (this.props.location.pathname === '/store/orders/pending') return 'pending'
+    if (this.props.location.pathname === '/store/orders/all') return ''
+    if (this.props.location.pathname === '/store/orders/complete') return 'success'
+    if (this.props.location.pathname === '/store/orders/pending') return 'forPay'
   }
   getOrders = () => {
     Axios.get('/orders', {
