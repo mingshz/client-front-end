@@ -65,17 +65,21 @@ class Shop {
     if (!this.total) return
     Toast.loading('提交中', 30)
     try {
-      await Axios.post('/order', {
+      const { resultCode, resultMsg } = await Axios.post('/order', {
         orderId: orderId,
         items: toJS(this.orders)
       })
-      Toast.hide()
-      history.push('/store/orders/all')
-      runInAction(() => {
-        this.easyOrders = {}
-        this.orders = []
-        this.total = 0
-      })
+      if (resultCode === 4002) {
+        Toast.fail(resultMsg)
+      } else {
+        Toast.hide()
+        history.push('/store/orders/all')
+        runInAction(() => {
+          this.easyOrders = {}
+          this.orders = []
+          this.total = 0
+        })
+      }
     } catch (err) {
       console.log(err)
       Toast.hide()
