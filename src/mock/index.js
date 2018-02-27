@@ -18,7 +18,7 @@ mock.onGet(/\/user$/).reply(200, {
   id: 5,
   avatar:
     'http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epm89OQtZt24aicSgu2ccE7Z3HEjML7WbstGUgF0EkGVI0uLeMRqbmBIa8RmaUsGsqpTLN26sTbemw/132',
-  storeId: '',
+  storeId: '123',
   guidable: false,
   enabled: true
 })
@@ -229,7 +229,7 @@ mock.onPut(/\/payment\/(.*)/).reply(config => {
   }
 })
 
-mock.onPost(/\/order/).reply(200, {})
+mock.onPost(/\/order/).reply(200, { data: null, resultCode: 4002, resultMsg: '订单已被创建，请重新扫码下单' })
 
 mock.onGet(/\/items\/(.*)/).reply(
   200,
