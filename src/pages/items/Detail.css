@@ -1,6 +1,6 @@
 :local .hd {
   width: 100%;
-  height: 5.81rem;
+  height: auto;
   background: #e2e6ea;
 }
 :local .hd img {
